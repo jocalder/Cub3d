@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 10:35:18 by jocalder          #+#    #+#             */
-/*   Updated: 2024/10/03 21:21:32 by jocalder         ###   ########.fr       */
+/*   Created: 2024/12/27 21:41:46 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/01/02 13:11:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t		start;
-	size_t		end;
+	unsigned int		i;
+	size_t				len;
 
+	i = 0;
+	len = ft_strlen(s1);
 	if (!s1 || !set)
 		return (NULL);
-	start = 0;
-	while (ft_strchr(set, s1[start]) && s1[start] != '\0')
-		start++;
-	end = ft_strlen(s1);
-	while (ft_strchr(set, s1[end - 1]) && end > start)
-		end--;
-	return (ft_substr(s1, start, end - start));
+	while (*s1 && ft_strchr(set, s1[i]))
+		i++;
+	while (len > i && ft_strchr(set, s1[len - 1]))
+		len--;
+	return (ft_substr(s1, i, len - i));
 }

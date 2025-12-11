@@ -3,38 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 12:48:23 by jocalder          #+#    #+#             */
-/*   Updated: 2024/09/24 17:11:43 by jocalder         ###   ########.fr       */
+/*   Created: 2024/12/01 18:20:54 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/01/02 13:09:45 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *str)
 {
 	int	sign;
 	int	result;
 
 	sign = 1;
 	result = 0;
-	while (*nptr == 32 || (*nptr >= 9 && *nptr <= 13))
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-')
 	{
-		nptr++;
+		sign = -1;
+		str++;
 	}
-	if (*nptr == 43 || *nptr == 45)
+	else if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		if (*nptr == 45)
-		{
-			sign = -1;
-		}
-		nptr++;
+		result = result * 10 + *str - '0';
+		str++;
 	}
-	while (*nptr >= '0' && *nptr <= '9' && *nptr)
-	{
-		result = result * 10 + *nptr - '0';
-		nptr++;
-	}
-	return (result * sign);
+	return (sign * result);
 }

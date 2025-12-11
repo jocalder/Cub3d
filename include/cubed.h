@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+#ifndef CUBED_H
+#define CUBED_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,8 +22,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <x11/keysym.h>
-#include <x11/X.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
 #include <math.h>
 #include "libft.h"
 #include "mlx.h"
@@ -42,15 +42,14 @@
 #define	RIGHT	65363
 #define ESC     65307
 
-typedef struct s_cub
+typedef struct s_img
 {
-	t_mlx		mlx;
-	t_win		win;
-	t_map		map;
-	t_player	player;
-	t_ray		ray;
-	t_keys		keys;
-} t_cub;
+	void	*ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+} t_img;
 
 typedef struct s_mlx
 {
@@ -64,15 +63,6 @@ typedef struct s_win
 	int		width;
 	int		height;
 } t_win;
-
-typedef struct s_img
-{
-	void	*ptr;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-} t_img;
 
 typedef struct s_map
 {
@@ -136,7 +126,23 @@ typedef struct s_keys
     int	right;
 } t_keys;
 
+typedef struct s_cub
+{
+	t_mlx		mlx;
+	t_win		win;
+	t_img		img;
+	t_map		map;
+	t_player	player;
+	t_ray		ray;
+	t_keys		keys;
+} t_cub;
 
+/*INIT DATA*/
+void	init_data(t_cub *cub);
 
+/*INIT MLX*/
+void	init_mlx(t_cub *cub);
 
+/*UTILS*/
+void	exit_error(const char *str);
 #endif

@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_free_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 20:47:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:21:01 by vgoyzuet         ###   ########.fr       */
+/*   Created: 2025/02/09 00:34:15 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/02/24 19:22:09 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	free_arrays(int count, ...)
 {
-	char	*ss;
-	size_t	slen;
-	size_t	i;
+	va_list		args;
+	char		*ptr;
+	int			i;
 
-	if (!s)
-		return (NULL);
-	slen = ft_strlen((char *)s);
-	if (start >= slen)
-		len = 0;
-	else if ((start + len) > slen)
-		len = slen - start;
-	ss = ft_calloc((len + 1), sizeof(char));
-	if (!ss)
-		return (NULL);
+	va_start(args, count);
 	i = 0;
-	while (s[start + i] && i < len)
+	while (i < count)
 	{
-		ss[i] = s[start + i];
+		ptr = va_arg(args, char *);
+		if (ptr)
+			free(ptr);
 		i++;
 	}
-	ss[i] = '\0';
-	return (ss);
+	va_end(args);
+}
+
+void	free_array(char **arr)
+{
+	int	i;
+
+	if (!arr || !*arr)
+		return ;
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

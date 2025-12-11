@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 20:50:32 by jocalder          #+#    #+#             */
-/*   Updated: 2024/09/25 15:44:59 by jocalder         ###   ########.fr       */
+/*   Created: 2024/11/18 02:38:04 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2024/12/23 17:44:33 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t	blen;
+	size_t	llen;
 
-	if (*little == '\0')
+	if (!*little)
 		return ((char *)big);
-	i = 0;
-	while (big[i] != '\0' && i < len)
+	if (len == 0)
+		return (NULL);
+	blen = ft_strlen(big);
+	llen = ft_strlen(little);
+	if (len > blen)
+		len = blen;
+	while (len >= llen)
 	{
-		j = 0;
-		while (big[i + j] == little[j] && (i + j) < len)
-		{
-			if (little[j + 1] == '\0')
-			{
-				return ((char *)&big[i]);
-			}
-			j++;
-		}
-		i++;
+		if (ft_strncmp(big, little, llen) == 0)
+			return ((char *)big);
+		big++;
+		len--;
 	}
 	return (NULL);
 }

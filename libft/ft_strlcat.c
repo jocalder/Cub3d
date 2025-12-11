@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 13:13:55 by jocalder          #+#    #+#             */
-/*   Updated: 2024/09/23 15:39:30 by jocalder         ###   ########.fr       */
+/*   Created: 2024/11/18 02:13:06 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/01/02 12:59:49 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	srclen;
-	size_t	dstlen;
+	size_t	dlen;
+	size_t	slen;
+	size_t	to_copy;
 	size_t	i;
 
-	srclen = 0;
-	dstlen = 0;
-	while (dst[dstlen] != '\0' && dstlen < size)
-		dstlen++;
-	while (src[srclen] != '\0')
-		srclen++;
-	if (dstlen == size)
-		return (size + srclen);
+	dlen = 0;
+	slen = 0;
 	i = 0;
-	while (src[i] != '\0' && (dstlen + i) < (size - 1))
+	while (dst[dlen] != '\0' && dlen < size)
+		dlen++;
+	while (src[slen] != '\0')
+		slen++;
+	if (size <= dlen)
+		return (size + slen);
+	to_copy = size - dlen -1;
+	if (to_copy > slen)
+		to_copy = slen;
+	while (i < to_copy)
 	{
-		dst[dstlen + i] = src[i];
+		dst[dlen + i] = src[i];
 		i++;
 	}
-	dst[dstlen + i] = '\0';
-	return (dstlen + srclen);
+	dst[dlen + to_copy] = '\0';
+	return (dlen + slen);
 }

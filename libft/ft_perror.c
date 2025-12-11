@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_perror.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 20:47:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:21:01 by vgoyzuet         ###   ########.fr       */
+/*   Created: 2025/01/17 20:52:49 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/02/09 18:16:25 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_perror(char *error)
 {
-	char	*ss;
-	size_t	slen;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	slen = ft_strlen((char *)s);
-	if (start >= slen)
-		len = 0;
-	else if ((start + len) > slen)
-		len = slen - start;
-	ss = ft_calloc((len + 1), sizeof(char));
-	if (!ss)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
-	{
-		ss[i] = s[start + i];
-		i++;
-	}
-	ss[i] = '\0';
-	return (ss);
+	if (!error)
+		ft_printf_fd(2, "Error\n");
+	else
+		ft_printf_fd(2, "Error: %s\n", error);
+	exit(EXIT_FAILURE);
 }

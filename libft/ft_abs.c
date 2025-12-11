@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 20:47:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:21:01 by vgoyzuet         ###   ########.fr       */
+/*   Created: 2025/02/25 21:52:43 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/02/25 21:53:52 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_abs(int x)
 {
-	char	*ss;
-	size_t	slen;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	slen = ft_strlen((char *)s);
-	if (start >= slen)
-		len = 0;
-	else if ((start + len) > slen)
-		len = slen - start;
-	ss = ft_calloc((len + 1), sizeof(char));
-	if (!ss)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
+	if (x < 0)
 	{
-		ss[i] = s[start + i];
-		i++;
+		if (x == INT_MIN)
+			return (INT_MAX);
+		return (-x);
 	}
-	ss[i] = '\0';
-	return (ss);
+	else
+		return (x);
 }

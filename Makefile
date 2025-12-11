@@ -9,14 +9,15 @@ NAME = Cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I libft
-CFLAGS += -I inc
+CFLAGS += -I include
+CFLAGS += -I minilibx
 
 
 LIBFT = libft/libft.a
-MINILIBX = minilibx-linux/libmlx_Linux.a
-MLX_FLAGS = -L minilibx-linux -lmlx -lXext -lX11
+MINILIBX = minilibx/libmlx_Linux.a
+MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
-SRCS = 	
+SRCS = 	init_mlx.c init_data.c utils.c main.c
 
 
 OBJS = $(SRCS:%.c=objs/%.o)
@@ -24,14 +25,14 @@ OBJS = $(SRCS:%.c=objs/%.o)
 all: $(LIBFT) $(MINILIBX) $(NAME)
 
 $(NAME): objs $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME) $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3d ready$(WHITE)"
 
 $(LIBFT):
 	@make --silent -C libft
 
 $(MINILIBX):
-	@make -C minilibx-linux --silent > /dev/null 2>&1
+	@make -C minilibx --silent > /dev/null 2>&1
 
 objs:
 	@mkdir -p objs/src/
@@ -41,13 +42,13 @@ objs/%.o: %.c
 
 clean:
 	@make --silent clean -C libft
-	@make clean -C minilibx-linux
+	@make clean -C minilibx
 	@rm -rf objs
 	@echo "Objetcs files deleted."
 
 fclean: clean
 	@make --silent fclean -C libft
-	@make clean -C minilibx-linux
+	@make clean -C minilibx
 	@rm -f $(NAME)
 	@echo "Full clean completed"
 

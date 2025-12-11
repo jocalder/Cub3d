@@ -53,7 +53,7 @@ void	close_program(t_cub *cub)
 	if (cub->mlx.img.ptr)
 		mlx_destroy_image(cub->mlx.mlx, cub->mlx.img.ptr);
 	if (cub->mlx.win)
-		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win)
+		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
 	free_map(cub->map.matrix, cub->map.height);
 	exit(0);
 }

@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 20:47:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:21:01 by vgoyzuet         ###   ########.fr       */
+/*   Created: 2025/01/24 20:00:52 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/02/09 18:15:38 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+long	ft_atol(const char *str)
 {
-	char	*ss;
-	size_t	slen;
-	size_t	i;
+	int		sign;
+	long	result;
 
-	if (!s)
-		return (NULL);
-	slen = ft_strlen((char *)s);
-	if (start >= slen)
-		len = 0;
-	else if ((start + len) > slen)
-		len = slen - start;
-	ss = ft_calloc((len + 1), sizeof(char));
-	if (!ss)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
+	sign = 1;
+	result = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-')
 	{
-		ss[i] = s[start + i];
-		i++;
+		sign = -1;
+		str++;
 	}
-	ss[i] = '\0';
-	return (ss);
+	else if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		str++;
+	}
+	return (sign * result);
 }

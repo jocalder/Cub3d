@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_print_stack.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 20:47:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:21:01 by vgoyzuet         ###   ########.fr       */
+/*   Created: 2025/01/27 03:16:41 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/02/06 21:31:53 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_print_stack(t_list *stack, char *str)
 {
-	char	*ss;
-	size_t	slen;
-	size_t	i;
+	t_list	*current;
 
-	if (!s)
-		return (NULL);
-	slen = ft_strlen((char *)s);
-	if (start >= slen)
-		len = 0;
-	else if ((start + len) > slen)
-		len = slen - start;
-	ss = ft_calloc((len + 1), sizeof(char));
-	if (!ss)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
+	ft_printf("%s\n", str);
+	if (!stack)
 	{
-		ss[i] = s[start + i];
-		i++;
+		ft_printf("empty\n");
+		return ;
 	}
-	ss[i] = '\0';
-	return (ss);
+	current = stack;
+	while (current)
+	{
+		ft_printf("%d\n", *(int *)current->content);
+		current = current->next;
+	}
 }

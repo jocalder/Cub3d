@@ -3,84 +3,107 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jocalder <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/15 17:24:38 by jocalder          #+#    #+#              #
-#    Updated: 2024/10/15 17:24:58 by jocalder         ###   ########.fr        #
+#    Created: 2024/11/18 22:28:58 by vgoyzuet          #+#    #+#              #
+#    Updated: 2025/02/25 20:45:11 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# Colors
+GREEN	=	\033[1;32m
+CYAN	=	\033[0;36m
+WHITE	=	\033[0m
+CLEAR	=	\r\033[K
 
-NAME		= libft.a
+# Library name
+NAME = libft.a
 
-SRCS		= ft_memset.c \
-			ft_bzero.c \
-			ft_memcpy.c \
-			ft_memmove.c \
-			ft_memchr.c \
-			ft_memcmp.c \
-			ft_strlen.c \
-			ft_strlcpy.c \
-			ft_strlcat.c \
-			ft_strchr.c \
-			ft_strrchr.c \
-			ft_strnstr.c \
-			ft_strncmp.c \
-			ft_atoi.c \
-			ft_isalpha.c \
-			ft_isdigit.c \
-			ft_isalnum.c \
-			ft_isascii.c \
-			ft_isprint.c \
-			ft_toupper.c \
-			ft_tolower.c \
-			ft_calloc.c \
-			ft_strdup.c \
-			ft_substr.c \
-			ft_striteri.c \
-			ft_strjoin.c \
-			ft_strtrim.c \
-			ft_split.c \
-			ft_itoa.c \
-			ft_strmapi.c \
-			ft_putchar_fd.c \
-			ft_putstr_fd.c \
-			ft_putendl_fd.c \
-			ft_putnbr_fd.c
-
-BNS_SRCS	= ft_lstnew_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstadd_back_bonus.c \
-			ft_lstdelone_bonus.c \
-			ft_lstclear_bonus.c	\
-			ft_lstiter_bonus.c	\
-			ft_lstmap_bonus.c	\
-				
-OBJS		= $(SRCS:.c=.o)
-
-BNS_OBJS	= $(BNS_SRCS:.c=.o)
-
+# Copiling command and options
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
-FLAGS		= -Wall -Werror -Wextra
+# List of files sources and its files objects
+SRCS	=	ft_isalpha.c\
+	ft_isdigit.c\
+	ft_isalnum.c\
+	ft_isascii.c\
+	ft_isprint.c\
+	ft_toupper.c\
+	ft_tolower.c\
+	ft_strlen.c\
+	ft_strchr.c\
+	ft_strrchr.c\
+	ft_strncmp.c\
+	ft_memset.c\
+	ft_bzero.c\
+	ft_memcpy.c\
+	ft_memmove.c\
+	ft_memchr.c\
+	ft_memcmp.c\
+	ft_strlcpy.c\
+	ft_strlcat.c\
+	ft_strnstr.c\
+	ft_atoi.c\
+	ft_atol.c\
+	ft_calloc.c\
+	ft_strdup.c\
+	ft_substr.c\
+	ft_strjoin.c\
+	ft_strtrim.c\
+	ft_split.c\
+	ft_itoa.c\
+	ft_strmapi.c\
+	ft_striteri.c\
+	ft_putchar_fd.c\
+	ft_putstr_fd.c\
+	ft_putendl_fd.c\
+	ft_putnbr_fd.c\
+	ft_lstnew_bonus.c\
+	ft_lstadd_front_bonus.c\
+	ft_lstsize_bonus.c\
+	ft_lstlast_bonus.c\
+	ft_lstadd_back_bonus.c\
+	ft_lstdelone_bonus.c\
+	ft_lstclear_bonus.c\
+	ft_lstiter_bonus.c\
+	ft_lstmap_bonus.c\
+	ft_printf.c\
+	ft_perror.c\
+	ft_printf_utils.c\
+	ft_print_stack.c\
+	get_next_line.c\
+	ft_free_utils.c\
+	so_strjoin.c\
+	ft_abs.c\
+	
+OBJS = $(SRCS:.c=.o)
 
+# Copila all
 all: $(NAME)
 
-$(NAME):
-	cc $(FLAGS) -c $(SRCS) -I ./
-	ar rc $(NAME) $(OBJS)
+# Create the library from objects
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "$(CLEAR)$(CYAN)libft.a successfully created."
 
-bonus: $(OBJS) $(BNS_OBJS) $(NAME)
-	ar rc $(NAME) $(BNS_OBJS)
+# Copila objects .c to files .o
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(CLEAR)$(CYAN)Compiling $<..."
 
+# Delete files objects (.o)
 clean:
-	rm -f $(OBJS) $(BNS_OBJS)
+	@rm -f $(OBJS) $(BNS_OBJS)
+	@echo "Libft -> Objetcs files deleted."
 
+# Delete files objects and library
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "Clean completed, libft.a deleted."
 
+# Clean and recopila all
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+# Prevent make from interpreting these words as files
+.PHONY: all clean fclean re

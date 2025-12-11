@@ -12,17 +12,7 @@
 
 #include "cubed.h"
 
-void	init_data(t_cub *cub)
-{
-	cub->mlx = NULL;
-	cub->win = NULL;
-	cub->map = NULL;
-	init_map(&cub->map);
-	init_player_north_south(&cub->player);
-	init_player_west_east(&cub->player);
-}
-
-void	init_map(t_map *map)
+static void	init_map(t_map *map)
 {
 	map->matrix = NULL;
 	map->fd = 0;
@@ -37,10 +27,11 @@ void	init_map(t_map *map)
 	map->floor_color = -1;
 	map->ceiling_color = -1;
 }
-void	init_player(t_player *player)
+
+static void	init_player(t_player *player)
 {
-	player->pos_x = 0.0;
-	player->pos_y = 0.0;
+	player->pos_x = HEIGHT / 2;
+	player->pos_y = WIDTH / 2;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
 	player->dir_y = 0.0;
@@ -51,7 +42,7 @@ void	init_player(t_player *player)
 	player->rotate = 0;
 }
 
-void	init_ray(t_ray *ray)
+static void	init_raycasting(t_ray *ray)
 {
 	ray->camera_x = 0.0;
 	ray->dir_x = 0.0;
@@ -70,4 +61,11 @@ void	init_ray(t_ray *ray)
 	ray->line_height = 0;
 	ray->draw_start = 0;
 	ray->draw_end = 0;
+}
+
+void	init_data(t_cub *cub)
+{
+	init_map(&cub->map);
+	init_player(&cub->player);
+	init_raycasting(&cub->ray);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/19 16:32:55 by jocalder          #+#    #+#             */
-/*   Updated: 2024/09/19 20:01:43 by jocalder         ###   ########.fr       */
+/*   Created: 2024/11/15 17:10:12 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2025/01/02 12:56:24 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	i;
-	size_t	src_len;
+	size_t	srcl;
+	size_t	copyl;
 
-	src_len = 0;
-	while (src[src_len] != '\0')
-		src_len++;
-	if (size == 0)
-		return (src_len);
-	i = 0;
-	while (src[i] != '\0' && i < size - 1)
+	srcl = ft_strlen(src);
+	if (size > 0)
 	{
-		dst[i] = src[i];
-		i++;
+		if (srcl >= size)
+			copyl = size - 1;
+		else
+			copyl = srcl;
+		ft_memcpy(dst, src, copyl);
+		dst[copyl] = '\0';
 	}
-	dst[i] = '\0';
-	return (src_len);
+	return (srcl);
 }

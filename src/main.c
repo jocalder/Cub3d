@@ -12,26 +12,28 @@
 
 #include "cubed.h"
 
-static int close_window(t_cub *cub)
+static int	close_window(t_cub *cub)
 {
-    (void)cub;
-    exit(0);
-    return (0);
+	(void)cub;
+	exit(0);
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
-    t_cub   cubed;
+    t_cub	cubed;
 
-    (void)argv;
-    if (argc != 2)
-        exit_error("Usage: ./Cub3d <valid_map.cub>\n");
-    ft_bzero(&cubed, sizeof(t_cub));
-    init_data(&cubed);
-    init_mlx(&cubed);
-    mlx_clear_window(cubed.mlx.mlx, cubed.mlx.win);
-    mlx_put_image_to_window(cubed.mlx.mlx, cubed.mlx.win, cubed.mlx.img.ptr, 0, 0);
-     mlx_hook(cubed.mlx.win, 17, 0, close_window, &cubed);
-    mlx_loop(cubed.mlx.mlx);
-    return (0);
+	(void)argv;
+	if (argc != 2)
+		exit_error("Usage: ./Cub3d <valid_map.cub>\n");
+	ft_bzero(&cubed, sizeof(t_cub));
+	init_data(&cubed);
+	init_mlx(&cubed);
+	mlx_clear_window(cubed.mlx.mlx, cubed.mlx.win);
+	mlx_hook(cubed.mlx.win, 2, 1L<<0, key_press, &cubed);
+	mlx_hook(cubed.mlx.win, 3, 1L<<1, key_release, &cubed);
+	mlx_loop_hook(cubed.mlx.mlx, render_frame, &cubed);
+	mlx_hook(cubed.mlx.win, 17, 0, close_window, &cubed);
+	mlx_loop(cubed.mlx.mlx);
+	return (0);
 }

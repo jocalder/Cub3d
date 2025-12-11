@@ -30,6 +30,7 @@
 
 #define	WIDTH	640
 #define	HEIGHT	420
+#define POINT_SIZE 8
 
 #define	W	119
 #define	A	97
@@ -143,6 +144,15 @@ void	init_data(t_cub *cub);
 /*INIT MLX*/
 void	init_mlx(t_cub *cub);
 
+/*KEYS*/
+int		key_press(int k, t_cub *cub);
+int		key_release(int k, t_cub *cub);
+void	close_program(t_cub *cub);
+
+/*RENDERING*/
+int		render_frame(t_cub *cub);
+void	put_pixel(t_img *img, int x, int y, int color);
 /*UTILS*/
 void	exit_error(const char *str);
+void	free_map(char **map, int height);
 #endif

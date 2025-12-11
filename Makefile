@@ -17,10 +17,11 @@ LIBFT = libft/libft.a
 MINILIBX = minilibx/libmlx_Linux.a
 MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
-SRCS = 	init_mlx.c init_data.c utils.c main.c
+SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/hooks.c src/dir_player.c \
+	src/main.c
 
 
-OBJS = $(SRCS:%.c=objs/%.o)
+OBJS = $(SRCS:src/%.c=objs/%.o)
 
 all: $(LIBFT) $(MINILIBX) $(NAME)
 
@@ -35,9 +36,9 @@ $(MINILIBX):
 	@make -C minilibx --silent > /dev/null 2>&1
 
 objs:
-	@mkdir -p objs/src/
+	@mkdir -p objs
 
-objs/%.o: %.c
+objs/%.o: src/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

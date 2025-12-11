@@ -14,9 +14,9 @@
 
 void	init_mlx(t_cub *cub)
 {
-	int		x;
-	int		y;
-	int		pixel;
+	//int		x;
+	//int		y;
+	//int		pixel;
 
 	cub->mlx.mlx = mlx_init();
 	if (cub->mlx.mlx == NULL)
@@ -29,7 +29,7 @@ void	init_mlx(t_cub *cub)
 		exit_error("mlx_new_image failed\n");
 	cub->mlx.img.addr = mlx_get_data_addr(cub->mlx.img.ptr,
 			&cub->mlx.img.bpp, &cub->mlx.img.line_len, &cub->mlx.img.endian);
-	y = 0;
+	/*y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -40,5 +40,5 @@ void	init_mlx(t_cub *cub)
 			x++;
 		}
 		y++;
-	}
+	}*/
 }

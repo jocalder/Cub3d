@@ -18,7 +18,7 @@ MINILIBX = minilibx/libmlx_Linux.a
 MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
 SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/hooks.c src/dir_player.c \
-	src/main.c
+	src/utils1.c src/parser_lines.c src/parser_map.c src/main.c
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)
@@ -43,13 +43,13 @@ objs/%.o: src/%.c
 
 clean:
 	@make --silent clean -C libft
-	@make clean -C minilibx
+	@make --silent clean -C minilibx > /dev/null 2>&1
 	@rm -rf objs
 	@echo "Objetcs files deleted."
 
 fclean: clean
 	@make --silent fclean -C libft
-	@make clean -C minilibx
+	@make --silent clean -C minilibx > /dev/null 2>&1
 	@rm -f $(NAME)
 	@echo "Full clean completed"
 

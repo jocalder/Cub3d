@@ -15,17 +15,17 @@
 void	exit_error(const char *str)
 {
 	if (str)
-		write(2, &str, ft_strlen(str));
+		write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
 	exit(1);
 }
 
-/*int	is_player_char(char c)
+int	is_player_char(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (1);
 	return (0);
-}*/
+}
 
 void	free_map(char **map, int height)
 {
@@ -42,7 +42,7 @@ void	free_map(char **map, int height)
 	free(map);
 }
 
-/*int	ft_array_len(char **array)
+int	ft_array_len(char **array)
 {
 	int		i;
 
@@ -54,7 +54,7 @@ void	free_map(char **map, int height)
 	return (i);
 }
 
-int	is_bad_char(char c)
+/*int	is_bad_char(char c)
 {
 	if (c == ' ')
 		return (1);

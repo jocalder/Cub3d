@@ -149,10 +149,23 @@ int		key_press(int k, t_cub *cub);
 int		key_release(int k, t_cub *cub);
 void	close_program(t_cub *cub);
 
+/*PARSER*/
+char	**open_and_read_lines(char *path);
+int		parse_cub(t_cub *cub, char *path);
+char	**parse_map(char **lines, int start, int *out_height, int *out_width);
+void	validate_identifiers(t_map *map);
+int		find_map_start(t_map *map, char	**lines);
+
+int		parse_lines_identifier(t_map *map, char *line);
+int		parse_color(char *str);
+
 /*RENDERING*/
 int		render_frame(t_cub *cub);
-void	put_pixel(t_img *img, int x, int y, int color);
+
 /*UTILS*/
 void	exit_error(const char *str);
 void	free_map(char **map, int height);
+int		is_player_char(char c);
+int		ft_array_len(char **array);
+void	print_map(t_map *map);
 #endif

@@ -23,10 +23,11 @@ int main(int argc, char **argv)
 {
     t_cub	cubed;
 
-	(void)argv;
 	if (argc != 2)
-		exit_error("Usage: ./Cub3d <valid_map.cub>\n");
+		exit_error("Usage: ./Cub3d <valid_map.cub>");
 	ft_bzero(&cubed, sizeof(t_cub));
+	if (parse_cub(&cubed, argv[1]) != 0)
+		exit_error("Error: Please use a valid map");
 	init_data(&cubed);
 	init_mlx(&cubed);
 	mlx_clear_window(cubed.mlx.mlx, cubed.mlx.win);

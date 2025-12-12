@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_lines.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,13 +11,6 @@
 /* ************************************************************************** */
 
 #include "cubed.h"
-
-char	*skip_spaces(char *str)
-{
-	while (*str && ((*str >= 9 && *str <= 13) || *str == 32))
-		str++;
-	return (str);
-}
 
 int	parse_color(char *str)
 {
@@ -47,24 +40,48 @@ int	parse_color(char *str)
 
 int	parse_lines_identifier(t_map *map, char *line)
 {
-	if (ft_strncmp(line, "NO", 3) == 0 && !map->no)
-		map->no = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "SO", 3) == 0 && !map->so)
-		map->so = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "WE", 3) == 0 && !map->we)
-		map->we = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "EA", 3) == 0 && !map->ea)
-		map->ea = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "F ", 3) == 0 && map->floor_color == -1)
-		map->floor_color = parse_color(line + 2);
-	else if (ft_strncmp(line, "C ", 3) == 0 && map->ceiling_color == -1)
-		map->ceiling_color = parse_color(line + 2);
-	else
+	if (!line)
 		return (0);
-	return (1);
+	if (ft_strncmp(line, "NO ", 3) == 0)
+	{
+		if (map && !map->no)
+			map->no = ft_strdup(line + 3);
+		return (1);
+	}
+	if (ft_strncmp(line, "SO ", 3) == 0)
+	{
+		if (map && !map->so)
+			map->so = ft_strdup(line + 3);
+		return (1);
+	}
+	if (ft_strncmp(line, "WE ", 3) == 0)
+	{
+		if (map && !map->we)
+			map->we = ft_strdup(line + 3);
+		return (1);
+	}
+	if (ft_strncmp(line, "EA ", 3) == 0)
+	{
+		if (map && !map->ea)
+			map->ea = ft_strdup(line + 3);
+		return (1);
+	}
+	if (ft_strncmp(line, "F ", 2) == 0)
+	{
+		if (map && map->floor_color == -1)
+			map->floor_color = parse_color(line + 2);
+		return (1);
+	}
+	if (ft_strncmp(line, "C ", 2) == 0)
+	{
+		if (map && map->ceiling_color == -1)
+			map->ceiling_color = parse_color(line + 2);
+		return (1);
+	}
+	return (0);
 }
 
-char	**add_line(char **array, char *line, int count)
+static char	**add_line(char **array, char *line, int count)
 {
 	char	**new_array;
 	int		i;
@@ -84,7 +101,7 @@ char	**add_line(char **array, char *line, int count)
 	return (new_array);
 }
 
-char	**add_last_line(char **array, char *line, int *count)
+static char	**add_last_line(char **array, char *line, int *count)
 {
 	if (line)
 	{
@@ -94,7 +111,7 @@ char	**add_last_line(char **array, char *line, int *count)
 	return (array);
 }
 
-char **read_all_lines(int fd)
+static char **read_all_lines(int fd)
 {
 	char	**array;
 	char	*line;
@@ -109,4 +126,17 @@ char **read_all_lines(int fd)
 	}
 	array = add_last_line(array, line, &count);
 	return (array);
+}
+
+char	**open_and_read_lines(char *path)
+{
+	int		fd;
+	char	**lines;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		exit_error("File not ready");
+	lines = read_all_lines(fd);
+	close(fd);
+	return (lines);
 }

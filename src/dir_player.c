@@ -12,7 +12,7 @@
 
 #include "cubed.h"
 
-void	put_pixel(t_img *img, int x, int y, int color)
+static void	put_pixel(t_img *img, int x, int y, int color)
 {
 	int pixel;
 
@@ -21,6 +21,31 @@ void	put_pixel(t_img *img, int x, int y, int color)
 		return ;
 	pixel = (y * img->line_len) + (x * (img->bpp / 8));
 	*(int *)(img->addr + pixel) = color;
+}
+static void	move_player(t_cub *cub)
+{
+	int		i;
+	int		j;
+	int		pixel;
+	
+	i = 0;
+	while (i < POINT_SIZE)
+	{
+		j = 0;
+		while (j < POINT_SIZE)
+		{
+			int x = cub->player.pos_x + j;
+			int y = cub->player.pos_y + i;
+			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+			{
+				pixel = y * cub->mlx.img.line_len + x * (cub->mlx.img.bpp / 8);
+				*(int *)(cub->mlx.img.addr + pixel) = 0x000000;
+			}
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.win, cub->mlx.img.ptr, 0, 0);
 }
 
 int	render_frame(t_cub *cub)
@@ -47,27 +72,6 @@ int	render_frame(t_cub *cub)
 	cub->player.pos_x -= 2;
 	if (cub->keys.d)
 	cub->player.pos_x += 2;
-	//put_pixel(&cub->mlx.img, (int)cub->player.pos_x, (int)cub->player.pos_y, 0xFF0000);
-	int i, j;
-	int pixel;
-
-	i = 0;
-	while (i < POINT_SIZE)
-	{
-    	j = 0;
-    	while (j < POINT_SIZE)
-    	{
-        	int x = cub->player.pos_x + j;
-        	int y = cub->player.pos_y + i;
-        	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-        	{
-            	pixel = y * cub->mlx.img.line_len + x * (cub->mlx.img.bpp / 8);
-            	*(int *)(cub->mlx.img.addr + pixel) = 0x000000;
-        	}
-        	j++;
-    	}
-    	i++;
-	}
-	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.win, cub->mlx.img.ptr, 0, 0);
+	move_player(cub);
 	return (0);
 }

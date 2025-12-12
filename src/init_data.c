@@ -28,10 +28,10 @@ static void	init_map(t_map *map)
 	map->ceiling_color = -1;
 }
 
-static void	init_player(t_player *player)
+static void	init_data_player(t_player *player)
 {
 	player->pos_x = HEIGHT / 2;
-	player->pos_y = WIDTH / 2;
+	player->pos_y = WIDTH / 5;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
 	player->dir_y = 0.0;
@@ -66,6 +66,6 @@ static void	init_raycasting(t_ray *ray)
 void	init_data(t_cub *cub)
 {
 	init_map(&cub->map);
-	init_player(&cub->player);
+	init_data_player(&cub->player);
 	init_raycasting(&cub->ray);
 }

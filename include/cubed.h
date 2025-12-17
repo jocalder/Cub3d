@@ -155,12 +155,15 @@ int		parse_cub(t_cub *cub, char *path);
 char	**parse_map(char **lines, int start, int *out_height, int *out_width);
 void	validate_identifiers(t_map *map);
 int		find_map_start(t_map *map, char	**lines);
+int		map_check(t_cub *cub);
 
 int		parse_lines_identifier(t_map *map, char *line);
 int		parse_color(char *str);
 
+/*PLAYER*/
+int		find_player(t_map *map, int *pos_x, int *pos_y);
+
 /*RENDERING*/
-int		render_frame(t_cub *cub);
 
 /*UTILS*/
 void	exit_error(const char *str);

@@ -53,10 +53,3 @@ int	ft_array_len(char **array)
 		i++;
 	return (i);
 }
-
-/*int	is_bad_char(char c)
-{
-	if (c == ' ')
-		return (1);
-	return (0);
-}*/

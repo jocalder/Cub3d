@@ -81,7 +81,8 @@ int	parse_cub(t_cub *cub, char *path)
 	if (cub->map.start == -1)
 		exit_error("Map not found");
 	cub->map.matrix = parse_map(lines, cub->map.start, &cub->map.height, &cub->map.width);
-	validate_identifiers(&cub->map);
+	//validate_identifiers(&cub->map);
+	//map_check(cub);
 	print_map(&cub->map);
 	free_map(lines, ft_array_len(lines));
 	return (0);

@@ -12,66 +12,26 @@
 
 #include "cubed.h"
 
-static void	put_pixel(t_img *img, int x, int y, int color)
-{
-	int pixel;
-
-	pixel = 0;
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return ;
-	pixel = (y * img->line_len) + (x * (img->bpp / 8));
-	*(int *)(img->addr + pixel) = color;
-}
-static void	move_player(t_cub *cub)
-{
-	int		i;
-	int		j;
-	int		pixel;
-	
-	i = 0;
-	while (i < POINT_SIZE)
-	{
-		j = 0;
-		while (j < POINT_SIZE)
-		{
-			int x = cub->player.pos_x + j;
-			int y = cub->player.pos_y + i;
-			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-			{
-				pixel = y * cub->mlx.img.line_len + x * (cub->mlx.img.bpp / 8);
-				*(int *)(cub->mlx.img.addr + pixel) = 0x000000;
-			}
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.win, cub->mlx.img.ptr, 0, 0);
-}
-
-int	render_frame(t_cub *cub)
+int	find_player(t_map *map, int *pos_x, int *pos_y)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < map->height)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < map->width)
 		{
-			put_pixel(&cub->mlx.img, x, y, 0xFFFFFF);
+			if (is_player_char(map->matrix[y][x]))
+			{
+				*pos_x = x;
+				*pos_y = y;
+				return (1);
+			}
 			x++;
 		}
 		y++;
 	}
-	if (cub->keys.w)
-	cub->player.pos_y -= 2;
-	if (cub->keys.s)
-	cub->player.pos_y += 2;
-	if (cub->keys.a)
-	cub->player.pos_x -= 2;
-	if (cub->keys.d)
-	cub->player.pos_x += 2;
-	move_player(cub);
 	return (0);
 }

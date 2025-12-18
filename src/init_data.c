@@ -30,8 +30,8 @@ static void	init_map(t_map *map)
 
 static void	init_data_player(t_player *player)
 {
-	player->pos_x = HEIGHT / 2;
-	player->pos_y = WIDTH / 5;
+	player->pos_x = 0.0;
+	player->pos_y = 0.0;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
 	player->dir_y = 0.0;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 13:28:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/17 13:28:17 by marvin           ###   ########.fr       */
+/*   Created: 2025/12/17 10:28:17 by marvin            #+#    #+#             */
+/*   Updated: 2025/12/17 10:28:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	padding_rows(t_map *map)
 {
 	int		y;
 	int		len;
-	int		row;
+	char	*row;
 
 	y = 0;
 	while (y < map->height)
 	{
-		len = ft_strlen(map->matrix[y])
+		len = ft_strlen(map->matrix[y]);
 		if (len < map->width)
 		{
 			row = malloc(map->width + 1);
@@ -37,12 +37,12 @@ void	padding_rows(t_map *map)
 	}
 }
 
-char	**dup_map(char **src, int height)
+static char	**dup_map(char **src, int height)
 {
 	char	**copy;
 	int		i;
 
-	copy = malloc(sizeof(char *) * (height + 1))
+	copy = malloc(sizeof(char *) * (height + 1));
 	if (!copy)
 		exit_error("Malloc copy map failed");
 	i = 0;
@@ -56,7 +56,7 @@ char	**dup_map(char **src, int height)
 	if (i < height)
 	{
 		while (--i > 0)
-			free(copy[i - 1])
+			free(copy[i - 1]);
 		free(copy);
 		return (NULL);
 	}
@@ -64,7 +64,7 @@ char	**dup_map(char **src, int height)
 	return (copy);
 }
 
-int	check_map_borders(t_map *map)
+static int	check_map_borders(t_map *map)
 {
 	int		i;
 
@@ -91,6 +91,29 @@ int	check_map_borders(t_map *map)
 	return (0);
 }
 
+static void	flood_fill(char **map, int height, int width, int y, int x, int *error)
+{
+	if (*error)
+		return ;
+	if (y < 0 || y >= height || x < 0 || x >= width)
+	{
+		*error = 1;
+		return ;
+	}
+	if (map[y][x] == ' ' || map[y][x] == '\0')
+	{
+		*error = 1;
+		return ;
+	}
+	if (map[y][x] == '1' || map[y][x] == 'F')
+		return ;
+	map[y][x] = 'F';
+	flood_fill(map, height, width, y + 1, x, error);
+	flood_fill(map, height, width, y - 1, x, error);
+	flood_fill(map, height, width, y, x + 1, error);
+	flood_fill(map, height, width, y, x - 1, error);
+}
+
 int	map_check(t_cub *cub)
 {
 	int		pos_x;
@@ -98,8 +121,9 @@ int	map_check(t_cub *cub)
 	int		error;
 	char	**copy_map;
 
-	if (!find_player(&cub->map, &pos_x, &pos_y))
-		exit_error("Player not found");
+	if (validate_player(&cub->map, &pos_x, &pos_y) == -1 ||
+		validate_player(&cub->map, &pos_x, &pos_y) == 0)
+		exit_error("Invalid player");
 	if (check_map_borders(&cub->map) != 0)
 		exit_error("Map has open borders");
 	copy_map = dup_map(cub->map.matrix, cub->map.height);
@@ -108,8 +132,8 @@ int	map_check(t_cub *cub)
 	if (is_player_char(cub->map.matrix[pos_y][pos_x]))
 		cub->map.matrix[pos_y][pos_x] = '0';
 	error = 0;
-	//flood_fill(copy_map, cub->map.height, cub->map.width, pos_x, pos_y, &error);
-	//free_map(copy_map, cub->map.height);
+	flood_fill(copy_map, cub->map.height, cub->map.width, pos_y, pos_x, &error);
+	free_map(copy_map, cub->map.height);
 	if (error)
 		exit_error("Map is not closed");
 	return (0);

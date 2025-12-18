@@ -101,30 +101,32 @@ typedef struct s_ray
 	double		camera_x;
 	double		dir_x;
 	double		dir_y;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
 	double		sidedist_x;
 	double		sidedist_y;
 	double		delta_x;
 	double		delta_y;
 	double		wall_dist;
 	double		wall_x;
-	int		side;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 } t_ray;
 
 typedef struct s_keys
 {
-	int	w;
-    int	a;
-    int	s;
-    int	d;
-    int	left;
-    int	right;
+	int		w;
+    int		a;
+    int		s;
+    int		d;
+	int		up;
+	int		down;
+    int		left;
+    int		right;
 } t_keys;
 
 typedef struct s_cub
@@ -155,13 +157,14 @@ int		parse_cub(t_cub *cub, char *path);
 char	**parse_map(char **lines, int start, int *out_height, int *out_width);
 void	validate_identifiers(t_map *map);
 int		find_map_start(t_map *map, char	**lines);
+void	padding_rows(t_map *map);
 int		map_check(t_cub *cub);
 
 int		parse_lines_identifier(t_map *map, char *line);
 int		parse_color(char *str);
 
 /*PLAYER*/
-int		find_player(t_map *map, int *pos_x, int *pos_y);
+int		validate_player(t_map *map, int *pos_x, int *pos_y);
 
 /*RENDERING*/
 

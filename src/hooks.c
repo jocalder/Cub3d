@@ -32,6 +32,10 @@ int	key_press(int k, t_cub *cub)
 		cub->keys.s = 1;
 	if (k == D)
 		cub->keys.d = 1;
+	if (k == UP)
+		cub->keys.up = 1;
+	if (k == DOWN)
+		cub->keys.down = 1;
 	if (k == LEFT)
 		cub->keys.left = 1;
 	if (k == RIGHT)
@@ -51,6 +55,10 @@ int	key_release(int k, t_cub *cub)
 		cub->keys.s = 0;
 	if (k == D)
 		cub->keys.d = 0;
+	if (k == UP)
+		cub->keys.up = 0;
+	if (k == DOWN)
+		cub->keys.down = 0;
 	if (k == LEFT)
 		cub->keys.left = 0;
 	if (k == RIGHT)

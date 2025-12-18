@@ -65,7 +65,6 @@ int	find_map_start(t_map *map, char	**lines)
 
 void	validate_identifiers(t_map *map)
 {
-	printf("%s\n%s\n%s\n%s\n", map->no, map->so, map->we, map->ea);
 	if (!map->no || !map->so || !map->we || !map->ea)
 		exit_error("No textures");
 	if (map->floor_color == -1 || map->ceiling_color == -1)
@@ -81,10 +80,11 @@ int	parse_cub(t_cub *cub, char *path)
 	if (cub->map.start == -1)
 		exit_error("Map not found");
 	cub->map.matrix = parse_map(lines, cub->map.start, &cub->map.height, &cub->map.width);
-	//validate_identifiers(&cub->map);
-	//map_check(cub);
+	validate_identifiers(&cub->map);
+	padding_rows(&cub->map);
+	map_check(cub);
 	print_map(&cub->map);
-	free_map(lines, ft_array_len(lines));
+	//free_map(lines, ft_array_len(lines));
 	return (0);
 }
 

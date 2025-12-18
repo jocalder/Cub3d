@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dir_player.c                                       :+:      :+:    :+:   */
+/*   init_player.c                                     	:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,13 @@
 
 #include "cubed.h"
 
-int	find_player(t_map *map, int *pos_x, int *pos_y)
+int	validate_player(t_map *map, int *pos_x, int *pos_y)
 {
 	int		x;
 	int		y;
+	int		count;
 
+	count = 0;
 	y = 0;
 	while (y < map->height)
 	{
@@ -25,13 +27,19 @@ int	find_player(t_map *map, int *pos_x, int *pos_y)
 		{
 			if (is_player_char(map->matrix[y][x]))
 			{
-				*pos_x = x;
-				*pos_y = y;
-				return (1);
+				count++;
+				if (count == 1)
+				{
+					*pos_x = x;
+					*pos_y = y;
+				}
+				else
+					return (-1);
 			}
 			x++;
 		}
 		y++;
 	}
-	return (0);
+	return (count);
 }
+

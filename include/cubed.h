@@ -94,6 +94,7 @@ typedef struct s_player
     int		move_x;
 	int		move_y;
     int		rotate;
+	char	dir;
 } t_player;
 
 typedef struct s_ray
@@ -165,6 +166,7 @@ int		parse_color(char *str);
 
 /*PLAYER*/
 int		validate_player(t_map *map, int *pos_x, int *pos_y);
+void	init_player(t_cub *cub, t_map *map);
 
 /*RENDERING*/
 

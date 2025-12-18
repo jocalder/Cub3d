@@ -121,16 +121,15 @@ int	map_check(t_cub *cub)
 	int		error;
 	char	**copy_map;
 
-	if (validate_player(&cub->map, &pos_x, &pos_y) == -1 ||
-		validate_player(&cub->map, &pos_x, &pos_y) == 0)
+	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");
 	if (check_map_borders(&cub->map) != 0)
 		exit_error("Map has open borders");
 	copy_map = dup_map(cub->map.matrix, cub->map.height);
 	if (!copy_map)
 		exit_error("Copy map to check failed");
-	if (is_player_char(cub->map.matrix[pos_y][pos_x]))
-		cub->map.matrix[pos_y][pos_x] = '0';
+	//if (is_player_char(cub->map.matrix[pos_y][pos_x]))
+	//	cub->map.matrix[pos_y][pos_x] = '0';
 	error = 0;
 	flood_fill(copy_map, cub->map.height, cub->map.width, pos_y, pos_x, &error);
 	free_map(copy_map, cub->map.height);

@@ -83,8 +83,8 @@ int	parse_cub(t_cub *cub, char *path)
 	validate_identifiers(&cub->map);
 	padding_rows(&cub->map);
 	map_check(cub);
+	init_player(cub, &cub->map);
 	print_map(&cub->map);
-	//free_map(lines, ft_array_len(lines));
 	return (0);
 }
 

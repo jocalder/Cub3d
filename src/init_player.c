@@ -43,3 +43,64 @@ int	validate_player(t_map *map, int *pos_x, int *pos_y)
 	return (count);
 }
 
+static void	init_player_north_south(t_player *player)
+{
+	if (player->dir == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
+	}
+	else if (player->dir == 'S')
+	{	
+		player->dir_x = 0;
+		player->dir_y = 1;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
+	}
+	else
+		return ;
+}
+
+static void	init_player_west_east(t_player *player)
+{
+	if (player->dir == 'W')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
+	}
+	else if (player->dir == 'E')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
+	}
+	else
+		return ;
+}
+
+static void	init_player_direction(t_cub *cub)
+{
+	init_player_north_south(&cub->player);
+	init_player_west_east(&cub->player);
+}
+
+void	init_player(t_cub *cub, t_map *map)
+{
+	int		x;
+	int		y;
+	int		count;
+
+	count = validate_player(map, &x, &y);
+	if (count != 1)
+		exit_error("Map must contain one player");
+	cub->player.pos_x = x + 0.5;
+	cub->player.pos_y = y + 0.5;
+	cub->player.dir = map->matrix[y][x];
+	map->matrix[y][x] = '0';
+	init_player_direction(cub);
+}

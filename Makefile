@@ -6,8 +6,8 @@ CLEAR	=	\r\033[K
 NAME = Cub3d
 
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 CFLAGS += -I libft
 CFLAGS += -I include
 CFLAGS += -I minilibx
@@ -17,9 +17,10 @@ LIBFT = libft/libft.a
 MINILIBX = minilibx/libmlx_Linux.a
 MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
-SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/player_update.c src/init_player.c \
-	src/utils1.c src/parser_lines.c src/parser_map.c src/validate_map.c 		\
-	src/player_move.c src/main.c
+SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/player_update.c src/init_player.c	\
+	src/utils1.c src/parser_lines.c src/parser_map.c src/validate_map.c						\
+	src/player_move.c src/hooks.c src/drawing_wall.c src/calculate_steps.c					\
+	src/raycasting.c src/main.c
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)

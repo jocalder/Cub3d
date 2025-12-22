@@ -67,6 +67,7 @@ void	validate_identifiers(t_map *map)
 {
 	if (!map->no || !map->so || !map->we || !map->ea)
 		exit_error("No textures");
+	//printf("Floor: %d, Ceiling: %d\n", map->floor_color, map->ceiling_color);
 	if (map->floor_color == -1 || map->ceiling_color == -1)
 		exit_error("No colors");
 }

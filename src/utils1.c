@@ -27,9 +27,18 @@ void	print_map(t_map *map)
 
 int	is_walkable(t_map *map, double x, double y)
 {
-	if (map->matrix[(int)y][(int)x] == '0')
-		return (1);
-	return (0);
+	int		map_x;
+	int		map_y;
+
+	map_x = (int)x;
+	map_y = (int)y;
+	if (map_x < 0 || map_y < 0
+		|| map_x >= map->width
+		|| map_y >= map->height)
+		return (0);
+	if (map->matrix[map_y][map_x] != '0')
+		return (0);
+	return (1);
 }
 
 void	close_program(t_cub *cub)
@@ -40,4 +49,21 @@ void	close_program(t_cub *cub)
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
 	free_map(cub->map.matrix, cub->map.height);
 	exit(0);
+}
+
+int	parse_value(char **str)
+{
+	int		value;
+
+	value = 0;
+	if (!ft_isdigit(**str))
+		return (-1);
+	while (ft_isdigit(**str))
+	{
+		value = value * 10 + (**str - '0');
+		(*str)++;
+	}
+	if (value < 0 || value > 255)
+		return (-1);
+	return (value);
 }

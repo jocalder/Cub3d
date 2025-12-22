@@ -20,21 +20,23 @@ int	parse_color(char *str)
 
 	if (!str)
 		return (-1);
-	r = ft_atoi(str);
-	while (*str != ',' && *str != '\0')
+	while (*str == ' ' || *str == '\t')
 		str++;
-	if (*str != ',')
+	r = parse_value(&str);
+	if (r == -1 || *str != ',')
 		return (-1);
 	str++;
-	g = ft_atoi(str);
-	while (*str != ',' && *str != '\0')
-		str++;
-	if (*str != ',')
+	g = parse_value(&str);
+	if (g == -1 || *str != ',')
 		return (-1);
 	str++;
-	b = ft_atoi(str);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	b = parse_value(&str);
+	if (b == -1)
 		return (-1);
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
+	if (ft_isalpha(*str))
+		exit_error("Please enter a valid value to floor color");
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -101,16 +103,6 @@ static char	**add_line(char **array, char *line, int count)
 	return (new_array);
 }
 
-static char	**add_last_line(char **array, char *line, int *count)
-{
-	if (line)
-	{
-		array = add_line(array, line, *count);
-		(*count)++;
-	}
-	return (array);
-}
-
 static char **read_all_lines(int fd)
 {
 	char	**array;
@@ -124,7 +116,6 @@ static char **read_all_lines(int fd)
 		array = add_line(array, line, count);
 		count++;
 	}
-	array = add_last_line(array, line, &count);
 	return (array);
 }
 

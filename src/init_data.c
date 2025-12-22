@@ -12,6 +12,18 @@
 
 #include "cubed.h"
 
+void	init_keys(t_keys *keys)
+{
+	keys->w = 0;
+	keys->a = 0;
+	keys->s = 0;
+	keys->d = 0;
+	keys->up = 0;
+	keys->down = 0;
+	keys->left = 0;
+	keys->right = 0;
+}
+
 static void	init_map(t_map *map)
 {
 	map->matrix = NULL;
@@ -33,7 +45,6 @@ static void	init_data_player(t_player *player)
 	player->pos_x = 0.0;
 	player->pos_y = 0.0;
 	player->dir_x = 0.0;
-	player->dir_y = 0.0;
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;
 	player->plane_y = 0.0;
@@ -63,9 +74,17 @@ static void	init_raycasting(t_ray *ray)
 	ray->draw_end = 0;
 }
 
+static void	init_window(t_win *window)
+{
+	window->width = WIDTH;
+	window->height = HEIGHT;
+}
+
 void	init_data(t_cub *cub)
 {
 	init_map(&cub->map);
 	init_data_player(&cub->player);
 	init_raycasting(&cub->ray);
+	init_window(&cub->win);
+	init_keys(&cub->keys);
 }

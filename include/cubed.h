@@ -46,9 +46,6 @@
 #define	MOVE_SPEED 0.08
 #define	ROT_SPEED  0.05
 
-#define COLOR_CEILING 0x87CEEB
-#define COLOR_FLOOR   0x444444
-
 #define COLOR_NORTH 0xFF0000
 #define COLOR_SOUTH 0x00FF00
 #define COLOR_EAST  0x0000FF
@@ -154,14 +151,10 @@ typedef struct s_cub
 
 /*INIT DATA*/
 void	init_data(t_cub *cub);
+void	init_keys(t_keys *keys);
 
 /*INIT MLX*/
 void	init_mlx(t_cub *cub);
-
-/*KEYS*/
-int		key_press(int k, t_cub *cub);
-int		key_release(int k, t_cub *cub);
-void	close_program(t_cub *cub);
 
 /*PARSER*/
 char	**open_and_read_lines(char *path);
@@ -184,7 +177,21 @@ void	move_left(t_cub *cub);
 void	move_right(t_cub *cub);
 void    update_player(t_cub *cub);
 
-/*RENDERING*/
+/*RENDERING AND RAYCASTING*/
+void	put_pixel(t_cub *cub, int x, int y, int color);
+int		get_wall_color(t_cub *cub);
+void	draw_column(t_cub *cub, int x);
+void	calculate_wall(t_cub *cub);
+void	calculate_delta(t_cub *cub);
+void	calculate_step(t_cub *cub);
+void	init_dda(t_cub *cub);
+void	init_ray(t_cub *cub, int x);
+void	raycast(t_cub *cub);
+int		render_frame(t_cub *cub);
+
+/*KEYS*/
+int		key_press(int k, t_cub *cub);
+int		key_release(int k, t_cub *cub);
 
 /*UTILS*/
 void	exit_error(const char *str);
@@ -193,4 +200,6 @@ int		is_player_char(char c);
 int		ft_array_len(char **array);
 void	print_map(t_map *map);
 int		is_walkable(t_map *map, double x, double y);
+void	close_program(t_cub *cub);
+int		parse_value(char **str);
 #endif

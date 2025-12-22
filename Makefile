@@ -17,9 +17,9 @@ LIBFT = libft/libft.a
 MINILIBX = minilibx/libmlx_Linux.a
 MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
-SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/hooks.c src/init_player.c \
+SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/player_update.c src/init_player.c \
 	src/utils1.c src/parser_lines.c src/parser_map.c src/validate_map.c 		\
-	src/main.c
+	src/player_move.c src/main.c
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)

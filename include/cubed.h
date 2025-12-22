@@ -43,6 +43,17 @@
 #define	RIGHT	65363
 #define ESC     65307
 
+#define	MOVE_SPEED 0.08
+#define	ROT_SPEED  0.05
+
+#define COLOR_CEILING 0x87CEEB
+#define COLOR_FLOOR   0x444444
+
+#define COLOR_NORTH 0xFF0000
+#define COLOR_SOUTH 0x00FF00
+#define COLOR_EAST  0x0000FF
+#define COLOR_WEST  0xFFFF00
+
 typedef struct s_img
 {
 	void	*ptr;
@@ -167,6 +178,11 @@ int		parse_color(char *str);
 /*PLAYER*/
 int		validate_player(t_map *map, int *pos_x, int *pos_y);
 void	init_player(t_cub *cub, t_map *map);
+void	move_forward(t_cub *cub);
+void	move_backward(t_cub *cub);
+void	move_left(t_cub *cub);
+void	move_right(t_cub *cub);
+void    update_player(t_cub *cub);
 
 /*RENDERING*/
 
@@ -176,4 +192,5 @@ void	free_map(char **map, int height);
 int		is_player_char(char c);
 int		ft_array_len(char **array);
 void	print_map(t_map *map);
+int		is_walkable(t_map *map, double x, double y);
 #endif

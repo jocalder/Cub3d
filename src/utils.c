@@ -42,14 +42,14 @@ void	free_map(char **map, int height)
 	free(map);
 }
 
-int	ft_array_len(char **array)
+char	*get_path(char *line)
 {
-	int		i;
+	char	*path;
 
-	i = 0;
-	if (!array)
-		return (0);
-	while (array[i])
-		i++;
-	return (i);
+	path = ft_strtrim(line, "\n\t");
+	if (!path || *path == '\0')
+		exit_error("Invalid texture path");
+	if (access(path, F_OK) != 0)
+		exit_error("Texture file not found");
+	return (path);
 }

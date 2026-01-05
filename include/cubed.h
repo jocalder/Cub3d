@@ -46,10 +46,10 @@
 #define	MOVE_SPEED 0.08
 #define	ROT_SPEED  0.05
 
-#define COLOR_NORTH 0xFF0000
-#define COLOR_SOUTH 0x00FF00
-#define COLOR_EAST  0x0000FF
-#define COLOR_WEST  0xFFFF00
+#define TEX_NORTH 0
+#define TEX_SOUTH 1
+#define TEX_EAST  2
+#define TEX_WEST  3
 
 typedef struct s_img
 {
@@ -197,7 +197,7 @@ int		key_release(int k, t_cub *cub);
 void	exit_error(const char *str);
 void	free_map(char **map, int height);
 int		is_player_char(char c);
-int		ft_array_len(char **array);
+char	*get_path(char *line);
 void	print_map(t_map *map);
 int		is_walkable(t_map *map, double x, double y);
 void	close_program(t_cub *cub);

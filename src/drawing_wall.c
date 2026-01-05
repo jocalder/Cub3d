@@ -26,12 +26,12 @@ void	put_pixel(t_cub *cub, int x, int y, int color)
 int	get_wall_color(t_cub *cub)
 {
 	if (cub->ray.side == 0 && cub->ray.dir_x > 0)
-		return (COLOR_WEST);
+		return (TEX_WEST);
 	if (cub->ray.side == 0)
-		return (COLOR_EAST);
+		return (TEX_EAST);
 	if (cub->ray.dir_y > 0)
-		return (COLOR_NORTH);
-	return (COLOR_SOUTH);
+		return (TEX_NORTH);
+	return (TEX_SOUTH);
 }
 
 void	draw_column(t_cub *cub, int x)

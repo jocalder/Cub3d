@@ -44,9 +44,9 @@ static void	init_mlx(t_cub *cub)
 			&cub->mlx.img.bpp, &cub->mlx.img.line_len, &cub->mlx.img.endian);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_cub	cub;
+	t_cub	cub;
 
 	if (argc != 2)
 		exit_error("Usage: ./Cub3d <valid_map.cub>");
@@ -56,8 +56,8 @@ int main(int argc, char **argv)
 	init_mlx(&cub);
 	mlx_clear_window(cub.mlx.mlx, cub.mlx.win);
 	mlx_loop_hook(cub.mlx.mlx, render_frame, &cub);
-	mlx_hook(cub.mlx.win, 2, 1L<<0, key_press, &cub);
-	mlx_hook(cub.mlx.win, 3, 1L<<1, key_release, &cub);
+	mlx_hook(cub.mlx.win, 2, 1L << 0, key_press, &cub);
+	mlx_hook(cub.mlx.win, 3, 1L << 1, key_release, &cub);
 	mlx_hook(cub.mlx.win, 17, 0, handle_close, &cub);
 	mlx_loop(cub.mlx.mlx);
 	return (0);

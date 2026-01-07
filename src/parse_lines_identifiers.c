@@ -92,7 +92,7 @@ static int	parse_floor_and_ceiling(t_map *map, char *line)
 	if (ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (map->ceiling_color != -1)
-			exit_error("Duplicate ceilin color");	
+			exit_error("Duplicate ceilin color");
 		map->ceiling_color = parse_color(line + 2);
 		if (map->ceiling_color == -1)
 			exit_error("Invalid ceiling color");

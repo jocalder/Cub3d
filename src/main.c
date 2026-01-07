@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		exit_error("Usage: ./Cub3d <valid_map.cub>");
-	ft_bzero(&cubed, sizeof(t_cub));
+	// ft_bzero(&cubed, sizeof(t_cub));
 	init_data(&cubed);
 	if (parse_cub(&cubed, argv[1]) != 0)
 		exit_error("Error: Please use a valid map");

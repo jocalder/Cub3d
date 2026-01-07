@@ -28,7 +28,8 @@ static char	**add_line(char **array, char *line, int count)
 	}
 	new_array[count] = line;
 	new_array[count + 1] = NULL;
-	free(array);
+	if (array)
+		free(array);
 	return (new_array);
 }
 

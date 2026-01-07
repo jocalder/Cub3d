@@ -58,6 +58,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 } t_img;
 
 typedef struct s_mlx
@@ -143,6 +145,7 @@ typedef struct s_cub
 	t_mlx		mlx;
 	t_win		win;
 	t_img		img;
+	t_img		textures[4];
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
@@ -179,7 +182,12 @@ void    update_player(t_cub *cub);
 
 /*RENDERING AND RAYCASTING*/
 void	put_pixel(t_cub *cub, int x, int y, int color);
-int		get_wall_color(t_cub *cub);
+void	load_all_textures(t_cub *cub);
+void    load_texture(t_cub *cub, t_img *texture, char *path);
+int		get_texture_pixel(t_img *texture, int x, int y);
+void	calculate_wall_x(t_cub *cub);
+t_img	*get_wall_texture(t_cub *cub);
+void	draw_textured_column(t_cub *cub, int x);
 void	draw_column(t_cub *cub, int x);
 void	calculate_wall(t_cub *cub);
 void	calculate_delta(t_cub *cub);

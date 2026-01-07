@@ -20,7 +20,7 @@ MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 SRCS = 	src/init_mlx.c src/init_data.c src/utils.c src/player_update.c src/init_player.c		\
 	src/utils1.c src/parse_lines_identifiers.c src/open_and_readlines.c src/parser_map.c		\
 	src/validate_map.c src/player_move.c src/hooks.c src/drawing_wall.c src/calculate_steps.c	\
-	src/raycasting.c src/main.c
+	src/raycasting.c src/textures.c src/main.c
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)

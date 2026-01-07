@@ -128,8 +128,6 @@ int	map_check(t_cub *cub)
 	copy_map = dup_map(cub->map.matrix, cub->map.height);
 	if (!copy_map)
 		exit_error("Copy map to check failed");
-	//if (is_player_char(cub->map.matrix[pos_y][pos_x]))
-	//	cub->map.matrix[pos_y][pos_x] = '0';
 	error = 0;
 	flood_fill(copy_map, cub->map.height, cub->map.width, pos_y, pos_x, &error);
 	free_map(copy_map, cub->map.height);

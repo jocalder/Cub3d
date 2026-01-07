@@ -12,39 +12,60 @@
 
 #include "cubed.h"
 
-void	put_pixel(t_cub *cub, int x, int y, int color)
+void	calculate_wall_x(t_cub *cub)
 {
-    char	*dst;
-
-	if (x < 0 || y < 0 || x >= cub->win.width || y >= cub->win.height)
-		return ;
-	dst = cub->mlx.img.addr
-		+ (y * cub->mlx.img.line_len + (x * cub->mlx.img.bpp / 8));
-	*(unsigned int *)dst = color;
+	if (cub->ray.side == 0)
+		cub->ray.wall_x = cub->player.pos_y
+			+ cub->ray.wall_dist * cub->ray.dir_y;
+	else
+		cub->ray.wall_x = cub->player.pos_x
+			+ cub->ray.wall_dist * cub->ray.dir_x;
+	cub->ray.wall_x = cub->ray.wall_x - (int)cub->ray.wall_x;
 }
 
-int	get_wall_color(t_cub *cub)
+t_img	*get_wall_texture(t_cub *cub)
 {
-	if (cub->ray.side == 0 && cub->ray.dir_x > 0)
-		return (TEX_WEST);
 	if (cub->ray.side == 0)
-		return (TEX_EAST);
+	{
+		if (cub->ray.dir_x > 0)
+			return (&cub->textures[TEX_WEST]);
+		return (&cub->textures[TEX_EAST]);
+	}
 	if (cub->ray.dir_y > 0)
-		return (TEX_NORTH);
-	return (TEX_SOUTH);
+		return (&cub->textures[TEX_NORTH]);
+	return (&cub->textures[TEX_SOUTH]);
+}
+
+void	draw_textured_column(t_cub *cub, int x)
+{
+	int		y;
+	int		texture_x;
+	int		texture_y;
+	t_img	*tex;
+
+	tex = get_wall_texture(cub);
+	calculate_wall_x(cub);
+	texture_x = (int)(cub->ray.wall_x * tex->width);
+	y = cub->ray.draw_start;
+	while (y <= cub->ray.draw_end)
+	{
+		texture_y = (y - cub->ray.draw_start)
+			* tex->height / cub->ray.line_height;
+		put_pixel(cub, x, y,
+			get_texture_pixel(tex, texture_x, texture_y));
+		y++;
+	}
 }
 
 void	draw_column(t_cub *cub, int x)
 {
 	int		y;
-    int		color;
 
 	y = 0;
 	while (y < cub->ray.draw_start)
 		put_pixel(cub, x, y++, cub->map.ceiling_color);
-	color = get_wall_color(cub);
-	while (y <= cub->ray.draw_end)
-		put_pixel(cub, x, y++, color);
+	draw_textured_column(cub, x);
+	y = cub->ray.draw_end + 1;
 	while (y < cub->win.height)
 		put_pixel(cub, x, y++, cub->map.floor_color);
 }

@@ -16,7 +16,8 @@ void	init_mlx(t_cub *cub)
 {
 	cub->mlx.mlx = mlx_init();
 	if (cub->mlx.mlx == NULL)
-		exit_error("mlx_init failed\n");
+	exit_error("mlx_init failed\n");
+	load_all_textures(cub);
 	cub->mlx.win = mlx_new_window(cub->mlx.mlx, WIDTH, HEIGHT, "CUB3D");
 	if (cub->mlx.win == NULL)
 		exit_error("mlx_init_window failed\n");

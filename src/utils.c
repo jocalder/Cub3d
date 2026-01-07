@@ -46,10 +46,21 @@ char	*get_path(char *line)
 {
 	char	*path;
 
-	path = ft_strtrim(line, "\n\t");
+	path = ft_strtrim(line, " \n\t\r");
 	if (!path || *path == '\0')
 		exit_error("Invalid texture path");
-	if (access(path, F_OK) != 0)
+	if (access(path, R_OK) != 0)
 		exit_error("Texture file not found");
 	return (path);
+}
+
+void	put_pixel(t_cub *cub, int x, int y, int color)
+{
+    char	*dst;
+
+	if (x < 0 || y < 0 || x >= cub->win.width || y >= cub->win.height)
+		return ;
+	dst = cub->mlx.img.addr
+		+ (y * cub->mlx.img.line_len + (x * cub->mlx.img.bpp / 8));
+	*(unsigned int *)dst = color;
 }

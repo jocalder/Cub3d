@@ -159,9 +159,6 @@ void	init_raycasting(t_ray *ray);
 void	init_window(t_win *window);
 void	init_keys(t_keys *keys);
 
-/*INIT MLX*/
-void	init_mlx(t_cub *cub);
-
 /*PARSER*/
 char	**open_and_read_lines(char *path);
 int		parse_cub(t_cub *cub, char *path);

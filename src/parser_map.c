@@ -87,5 +87,3 @@ int	parse_cub(t_cub *cub, char *path)
 	print_map(&cub->map);
 	return (0);
 }
-
-

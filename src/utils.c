@@ -15,8 +15,8 @@
 void	exit_error(const char *str)
 {
 	if (str)
-		write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
+		write(STDERR_FILENO, str, ft_strlen(str));
+	write(STDERR_FILENO, "\n", 1);
 	exit(1);
 }
 

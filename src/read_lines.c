@@ -32,7 +32,7 @@ static char	**add_line(char **array, char *line, int count)
 	return (new_array);
 }
 
-char **read_lines(int fd)
+char	**read_lines(int fd)
 {
 	char	**array;
 	char	*line;
@@ -40,10 +40,12 @@ char **read_lines(int fd)
 
 	array = NULL;
 	count = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		array = add_line(array, line, count);
 		count++;
+		line = get_next_line(fd);
 	}
 	return (array);
 }

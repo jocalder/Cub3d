@@ -30,7 +30,7 @@ char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 	}
 	map = (char **)malloc(sizeof(char *) * (height + 1));
 	if (!map)
-		exit_error("Malloc error\n");
+		exit_error("Malloc\n");
 	i = start;
 	height = 0;
 	width = 0;
@@ -75,17 +75,22 @@ int	parse_cub(t_cub *cub, char *path)
 {
 	char	**lines;
 	int		fd;
+	int		i;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		exit_error("open fd");
+		exit_error("Open fd");
 	lines = read_lines(fd);
 	if (close(fd) != 0)
-		exit_error("close fd");
+		exit_error("Close fd");
 	cub->map.start = find_map_start(&cub->map, lines);
 	if (cub->map.start == -1)
 		exit_error("Map not found");
 	cub->map.matrix = parse_map(lines, cub->map.start, &cub->map.height, &cub->map.width);
+	i = 0;
+	while (lines[i])
+		free(lines[i++]);
+	free(lines);
 	validate_identifiers(&cub->map);
 	padding_rows(&cub->map);
 	map_check(cub);

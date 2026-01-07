@@ -152,8 +152,11 @@ typedef struct s_cub
 	t_keys		keys;
 }	t_cub;
 
-/*INIT DATA*/
-void	init_data(t_cub *cub);
+/*INIT*/
+void	init_map(t_map *map);
+void	init_data_player(t_player *player);
+void	init_raycasting(t_ray *ray);
+void	init_window(t_win *window);
 void	init_keys(t_keys *keys);
 
 /*INIT MLX*/

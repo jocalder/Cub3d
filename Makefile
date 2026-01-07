@@ -3,7 +3,7 @@ CYAN	=	\033[0;36m
 WHITE	=	\033[0m
 CLEAR	=	\r\033[K
 
-NAME = Cub3d
+NAME = cub3d
 
 
 CC = cc
@@ -31,7 +31,7 @@ sanitize:
 
 $(NAME): objs $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)Cub3d ready$(WHITE)"
+	@echo "$(GREEN)cub3d ready$(WHITE)"
 
 $(LIBFT):
 	@make --silent -C libft

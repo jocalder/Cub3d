@@ -14,8 +14,12 @@
 
 void	exit_error(const char *str)
 {
+	write(STDERR_FILENO, "Error", 6);
 	if (str)
+	{
+		write(STDERR_FILENO, ": ", 3);
 		write(STDERR_FILENO, str, ft_strlen(str));
+	}
 	write(STDERR_FILENO, "\n", 1);
 	exit(1);
 }

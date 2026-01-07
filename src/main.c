@@ -34,7 +34,7 @@ static void	init_mlx(t_cub *cub)
 	if (cub->mlx.mlx == NULL)
 		exit_error("mlx_init failed\n");
 	load_all_textures(cub);
-	cub->mlx.win = mlx_new_window(cub->mlx.mlx, WIDTH, HEIGHT, "CUB3D");
+	cub->mlx.win = mlx_new_window(cub->mlx.mlx, WIDTH, HEIGHT, "cub3d");
 	if (cub->mlx.win == NULL)
 		exit_error("mlx_init_window failed\n");
 	cub->mlx.img.ptr = mlx_new_image(cub->mlx.mlx, WIDTH, HEIGHT);

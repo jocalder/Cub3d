@@ -19,11 +19,11 @@ int	validate_player(t_map *map, int *pos_x, int *pos_y)
 	int		count;
 
 	count = 0;
-	y = 0;
-	while (y < map->height)
+	y = -1;
+	while (++y < map->height)
 	{
-		x = 0;
-		while (x < map->width)
+		x = -1;
+		while (++x < map->width)
 		{
 			if (is_player_char(map->matrix[y][x]))
 			{
@@ -36,9 +36,7 @@ int	validate_player(t_map *map, int *pos_x, int *pos_y)
 				else
 					return (-1);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (count);
 }
@@ -53,7 +51,7 @@ static void	init_player_north_south(t_player *player)
 		player->plane_y = 0;
 	}
 	else if (player->dir == 'S')
-	{	
+	{
 		player->dir_x = 0;
 		player->dir_y = 1;
 		player->plane_x = -0.66;

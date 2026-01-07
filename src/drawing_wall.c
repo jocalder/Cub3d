@@ -74,15 +74,13 @@ void	calculate_wall(t_cub *cub)
 {
 	if (cub->ray.side == 0)
 	{
-		cub->ray.wall_dist =
-			(cub->ray.map_x - cub->player.pos_x
-			+ (1 - cub->ray.step_x) / 2) / cub->ray.dir_x;
+		cub->ray.wall_dist = (cub->ray.map_x - cub->player.pos_x
+				+ (1 - cub->ray.step_x) / 2) / cub->ray.dir_x;
 	}
 	else
 	{
-		cub->ray.wall_dist =
-			(cub->ray.map_y - cub->player.pos_y
-			+ (1 - cub->ray.step_y) / 2) / cub->ray.dir_y;
+		cub->ray.wall_dist = (cub->ray.map_y - cub->player.pos_y
+				+ (1 - cub->ray.step_y) / 2) / cub->ray.dir_y;
 	}
 	if (cub->ray.wall_dist < 0.00001)
 		cub->ray.wall_dist = 0.00001;

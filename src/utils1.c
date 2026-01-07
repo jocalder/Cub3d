@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 06:21:01 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/12 06:21:01 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/08 00:05:04 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/08 00:05:04 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	print_map(t_map *map)
 {
-	int		i = 0;
+	int	i;
 
+	i = 0;
 	printf("\n--- MAP (%dx%d) ---\n", map->width, map->height);
 	while (i < map->height)
 	{
-    	printf("%s\n", map->matrix[i]);
-    	i++;
+		printf("%s\n", map->matrix[i]);
+		i++;
 	}
 	printf("\n");
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 11:09:32 by marvin            #+#    #+#             */
-/*   Updated: 2026/01/07 11:09:32 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/08 00:04:54 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/08 00:04:54 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
 
-void    load_texture(t_cub *cub, t_img *texture, char *path)
+void	load_texture(t_cub *cub, t_img *texture, char *path)
 {
 	texture->ptr = mlx_xpm_file_to_image(cub->mlx.mlx,
 			path, &texture->width, &texture->height);

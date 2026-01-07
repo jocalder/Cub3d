@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lines_identifiers.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/05 11:28:10 by marvin            #+#    #+#             */
-/*   Updated: 2026/01/05 11:28:10 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/08 00:04:20 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/08 00:04:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 12:30:07 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/09 12:30:07 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/08 00:04:38 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/08 00:04:38 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	rotate_player(t_cub *cub, double rotate)
 {
 	double	old_dirx;
-    double	old_planex;
+	double	old_planex;
 
 	old_dirx = cub->player.dir_x;
 	cub->player.dir_x = cub->player.dir_x * cos(rotate)
@@ -29,7 +29,7 @@ static void	rotate_player(t_cub *cub, double rotate)
 		+ cub->player.plane_y * cos(rotate);
 }
 
-void    update_player(t_cub *cub)
+void	update_player(t_cub *cub)
 {
 	if (cub->keys.w)
 		move_forward(cub);

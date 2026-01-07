@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/22 09:15:05 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/22 09:15:05 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/08 00:04:43 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/08 00:04:43 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	init_dda(t_cub *cub)
 			cub->ray.map_y += cub->ray.step_y;
 			cub->ray.side = 1;
 		}
-		if (cub->ray.map_y >= 0 && cub->ray.map_y < cub->map.height &&
-    			cub->ray.map_x >= 0 && cub->ray.map_x < cub->map.width &&
-    			cub->map.matrix[cub->ray.map_y][cub->ray.map_x] != '0')
+		if (cub->ray.map_y >= 0 && cub->ray.map_y < cub->map.height
+			&& cub->ray.map_x >= 0 && cub->ray.map_x < cub->map.width
+			&& cub->map.matrix[cub->ray.map_y][cub->ray.map_x] != '0')
 			hit = 1;
 	}
 }

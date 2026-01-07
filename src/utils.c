@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 11:52:12 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/11 11:52:12 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/08 00:04:58 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/08 00:04:58 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_path(char *line)
 
 void	put_pixel(t_cub *cub, int x, int y, int color)
 {
-    char	*dst;
+	char	*dst;
 
 	if (x < 0 || y < 0 || x >= cub->win.width || y >= cub->win.height)
 		return ;

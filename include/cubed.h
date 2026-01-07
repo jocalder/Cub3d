@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 09:23:19 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/09 09:23:19 by marvin           ###   ########.fr       */
+/*   Created: 2026/01/07 16:38:44 by vgoyzuet          #+#    #+#             */
+/*   Updated: 2026/01/07 16:38:44 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 #include "libft.h"
 #include "mlx.h"
 
-#define	WIDTH	640
-#define	HEIGHT	420
+#define	WIDTH	1280
+#define	HEIGHT	720
 #define POINT_SIZE 8
 
 #define	W	119
@@ -43,8 +43,8 @@
 #define	RIGHT	65363
 #define ESC     65307
 
-#define	MOVE_SPEED 0.08
-#define	ROT_SPEED  0.05
+#define	MOVE_SPEED 0.04
+#define	ROT_SPEED  0.02
 
 #define TEX_NORTH 0
 #define TEX_SOUTH 1
@@ -210,4 +210,5 @@ void	print_map(t_map *map);
 int		is_walkable(t_map *map, double x, double y);
 void	close_program(t_cub *cub);
 int		parse_value(char **str);
+
 #endif

@@ -70,7 +70,7 @@ void	validate_identifiers(t_map *map)
 	if (map->floor_color == -1 || map->ceiling_color == -1)
 		exit_error("No colors");
 }
-/*free lines after use it*/
+
 int	parse_cub(t_cub *cub, char *path)
 {
 	char	**lines;

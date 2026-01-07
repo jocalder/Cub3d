@@ -49,10 +49,10 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 
 	if (argc != 2)
-		exit_error("Usage: ./Cub3d <valid_map.cub>");
+		exit_error("Usage: ./cub3d <map.cub>");
 	init_data(&cub);
 	if (parse_cub(&cub, argv[1]) != 0)
-		exit_error("Error: Please use a valid map");
+		exit_error("Please use a valid map");
 	init_mlx(&cub);
 	mlx_clear_window(cub.mlx.mlx, cub.mlx.win);
 	mlx_loop_hook(cub.mlx.mlx, render_frame, &cub);

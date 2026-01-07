@@ -160,7 +160,7 @@ void	init_window(t_win *window);
 void	init_keys(t_keys *keys);
 
 /*PARSER*/
-char	**open_and_read_lines(char *path);
+char	**read_lines(int fd);
 int		parse_cub(t_cub *cub, char *path);
 char	**parse_map(char **lines, int start, int *out_height, int *out_width);
 void	validate_identifiers(t_map *map);

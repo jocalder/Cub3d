@@ -74,8 +74,14 @@ void	validate_identifiers(t_map *map)
 int	parse_cub(t_cub *cub, char *path)
 {
 	char	**lines;
+	int		fd;
 
-	lines = open_and_read_lines(path);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		exit_error("open fd");
+	lines = read_lines(fd);
+	if (close(fd) != 0)
+		exit_error("close fd");
 	cub->map.start = find_map_start(&cub->map, lines);
 	if (cub->map.start == -1)
 		exit_error("Map not found");

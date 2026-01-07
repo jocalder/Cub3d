@@ -32,7 +32,7 @@ static char	**add_line(char **array, char *line, int count)
 	return (new_array);
 }
 
-static char **read_all_lines(int fd)
+char **read_lines(int fd)
 {
 	char	**array;
 	char	*line;
@@ -46,17 +46,4 @@ static char **read_all_lines(int fd)
 		count++;
 	}
 	return (array);
-}
-
-char	**open_and_read_lines(char *path)
-{
-	int		fd;
-	char	**lines;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		exit_error("File not ready");
-	lines = read_all_lines(fd);
-	close(fd);
-	return (lines);
 }

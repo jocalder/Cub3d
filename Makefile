@@ -24,7 +24,7 @@ SRCS =	src/main.c						\
 		src/init_player.c				\
 		src/utils1.c 					\
 		src/parse_lines_identifiers.c	\
-		src/open_and_readlines.c		\
+		src/read_lines.c				\
 		src/parser_map.c				\
 		src/validate_map.c 				\
 		src/player_move.c 				\

@@ -16,26 +16,30 @@ char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 {
 	char	**map;
 	int		i;
+	int		height;
+	int		width;
 
 	i = start - 1;
-	*out_height = 0;
+	height = 0;
 	if (!lines)
 		return (NULL);
 	while (lines[++i])
-		*out_height++;
-	map = (char **)malloc(sizeof(char *) * (*out_height + 1));
+		height++;
+	map = (char **)malloc(sizeof(char *) * (height + 1));
 	if (!map)
 		exit_error("Malloc\n");
 	i = start - 1;
-	*out_height = 0;
-	*out_width = 0;
+	height = 0;
+	width = 0;
 	while (lines[++i])
 	{
-		map[*out_height] = ft_strdup(lines[i]);
-		if ((int)ft_strlen(map[*out_height]) > *out_width)
-			*out_width = (int)ft_strlen(map[*out_height]);
-		*out_height++;
+		map[height] = ft_strdup(lines[i]);
+		if ((int)ft_strlen(map[height]) > width)
+			width = (int)ft_strlen(map[height]);
+		height++;
 	}
+	*out_height = height;
+	*out_width = width;
 	return (map);
 }
 

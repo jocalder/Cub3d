@@ -11,45 +11,45 @@
 /* ************************************************************************** */
 
 #ifndef CUBED_H
-#define CUBED_H
+# define CUBED_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include <stdbool.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <X11/keysym.h>
-#include <X11/X.h>
-#include <math.h>
-#include "libft.h"
-#include "mlx.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <errno.h>
+# include <stdbool.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <math.h>
+# include "libft.h"
+# include "mlx.h"
 
-#define	WIDTH	1280
-#define	HEIGHT	720
-#define POINT_SIZE 8
+# define WIDTH		1280
+# define HEIGHT		720
+# define POINT_SIZE	8
 
-#define	W	119
-#define	A	97
-#define	S	115
-#define	D	100
+# define W	119
+# define A	97
+# define S	115
+# define D	100
 
-#define	UP		65362
-#define	DOWN	65364
-#define	LEFT	65361
-#define	RIGHT	65363
-#define ESC     65307
+# define UP		65362
+# define DOWN	65364
+# define LEFT	65361
+# define RIGHT	65363
+# define ESC	65307
 
-#define	MOVE_SPEED 0.04
-#define	ROT_SPEED  0.02
+# define MOVE_SPEED 0.04
+# define ROT_SPEED  0.02
 
-#define TEX_NORTH 0
-#define TEX_SOUTH 1
-#define TEX_EAST  2
-#define TEX_WEST  3
+# define TEX_NORTH 0
+# define TEX_SOUTH 1
+# define TEX_EAST  2
+# define TEX_WEST  3
 
 typedef struct s_img
 {
@@ -60,20 +60,20 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
-} t_img;
+}	t_img;
 
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	t_img	img;
-} t_mlx;
+}	t_mlx;
 
 typedef struct s_win
 {
 	int		width;
 	int		height;
-} t_win;
+}	t_win;
 
 typedef struct s_map
 {
@@ -81,31 +81,31 @@ typedef struct s_map
 	int		fd;
 	int		line_count;
 	int		start;
-    int		width;
-    int		height;
+	int		width;
+	int		height;
 
 	char	*no;
-    char	*so;
-    char	*we;
-    char	*ea;
+	char	*so;
+	char	*we;
+	char	*ea;
 
-    int		floor_color;
-    int		ceiling_color;
-} t_map;
+	int		floor_color;
+	int		ceiling_color;
+}	t_map;
 
 typedef struct s_player
 {
 	double	pos_x;
-    double	pos_y;
-    double	dir_x;
-    double	dir_y;
-    double	plane_x;
-    double	plane_y;
-    int		move_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int		move_x;
 	int		move_y;
-    int		rotate;
+	int		rotate;
 	char	dir;
-} t_player;
+}	t_player;
 
 typedef struct s_ray
 {
@@ -126,19 +126,19 @@ typedef struct s_ray
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
-} t_ray;
+}	t_ray;
 
 typedef struct s_keys
 {
 	int		w;
-    int		a;
-    int		s;
-    int		d;
+	int		a;
+	int		s;
+	int		d;
 	int		up;
 	int		down;
-    int		left;
-    int		right;
-} t_keys;
+	int		left;
+	int		right;
+}	t_keys;
 
 typedef struct s_cub
 {
@@ -150,7 +150,7 @@ typedef struct s_cub
 	t_player	player;
 	t_ray		ray;
 	t_keys		keys;
-} t_cub;
+}	t_cub;
 
 /*INIT DATA*/
 void	init_data(t_cub *cub);
@@ -178,12 +178,12 @@ void	move_forward(t_cub *cub);
 void	move_backward(t_cub *cub);
 void	move_left(t_cub *cub);
 void	move_right(t_cub *cub);
-void    update_player(t_cub *cub);
+void	update_player(t_cub *cub);
 
 /*RENDERING AND RAYCASTING*/
 void	put_pixel(t_cub *cub, int x, int y, int color);
 void	load_all_textures(t_cub *cub);
-void    load_texture(t_cub *cub, t_img *texture, char *path);
+void	load_texture(t_cub *cub, t_img *texture, char *path);
 int		get_texture_pixel(t_img *texture, int x, int y);
 void	calculate_wall_x(t_cub *cub);
 t_img	*get_wall_texture(t_cub *cub);

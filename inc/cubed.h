@@ -41,8 +41,8 @@
 # define RIGHT	65363
 # define ESC	65307
 
-# define MOVE_SPEED 0.04
-# define ROT_SPEED  0.02
+# define MOVE_SPEED 0.02
+# define ROT_SPEED  0.01
 
 # define TEX_NORTH 0
 # define TEX_SOUTH 1

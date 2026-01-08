@@ -6,8 +6,8 @@ CLEAR	=	\r\033[K
 NAME = cub3d
 
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I libft
 CFLAGS += -I inc
 CFLAGS += -I minilibx
@@ -38,8 +38,6 @@ SRCS =	src/main.c						\
 OBJS = $(SRCS:src/%.c=objs/%.o)
 
 all: $(LIBFT) $(MINILIBX) $(NAME)
-
-sanitize: 
 
 $(NAME): objs $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)

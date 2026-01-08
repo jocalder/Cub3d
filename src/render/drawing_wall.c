@@ -42,17 +42,31 @@ static void	draw_textured_column(t_cub *cub, int x)
 	int		texture_x;
 	int		texture_y;
 	t_img	*tex;
+	double	step;
+	double	tex_pos;
 
 	tex = get_wall_texture(cub);
 	calculate_wall_x(cub);
 	texture_x = (int)(cub->ray.wall_x * tex->width);
+	if ((cub->ray.side == 0 && cub->ray.dir_x > 0)
+		|| (cub->ray.side == 1 && cub->ray.dir_y < 0))
+		texture_x = tex->width - texture_x - 1;
+	if (cub->ray.line_height == 0)
+		return ;
+	step = (double)tex->height / (double)cub->ray.line_height;
+	tex_pos = (cub->ray.draw_start - cub->win.height / 2
+			+ cub->ray.line_height / 2) * step;
 	y = cub->ray.draw_start;
 	while (y <= cub->ray.draw_end)
 	{
-		texture_y = (y - cub->ray.draw_start)
-			* tex->height / cub->ray.line_height;
+		texture_y = (int)tex_pos;
+		if (texture_y < 0)
+			texture_y = 0;
+		if (texture_y >= tex->height)
+			texture_y = tex->height - 1;
 		put_pixel(cub, x, y,
 			get_texture_pixel(tex, texture_x, texture_y));
+		tex_pos += step;
 		y++;
 	}
 }

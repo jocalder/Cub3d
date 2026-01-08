@@ -15,6 +15,7 @@
 void	init_map(t_map *map)
 {
 	map->matrix = NULL;
+	map->cpy_map = NULL;
 	map->fd = 0;
 	map->line_count = 0;
 	map->start = -1;

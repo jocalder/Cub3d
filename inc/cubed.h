@@ -78,6 +78,7 @@ typedef struct s_win
 typedef struct s_map
 {
 	char	**matrix;
+	char	**cpy_map;
 	int		fd;
 	int		line_count;
 	int		start;

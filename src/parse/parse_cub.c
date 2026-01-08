@@ -58,6 +58,8 @@ static int	find_map_start(t_map *map, char	**lines)
 {
 	int		i;
 
+	if (!lines)
+		return (-1);
 	i = 0;
 	while (lines[i])
 	{

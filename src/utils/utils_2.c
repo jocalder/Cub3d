@@ -36,16 +36,6 @@ int	is_walkable(t_map *map, double x, double y)
 	return (1);
 }
 
-void	close_program(t_cub *cub)
-{
-	if (cub->mlx.img.ptr)
-		mlx_destroy_image(cub->mlx.mlx, cub->mlx.img.ptr);
-	if (cub->mlx.win)
-		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-	free_map(cub->map.matrix, cub->map.height);
-	exit(0);
-}
-
 void	free_map(char **map, int height)
 {
 	int		i;
@@ -70,4 +60,12 @@ void	put_pixel(t_cub *cub, int x, int y, int color)
 	dst = cub->mlx.img.addr
 		+ (y * cub->mlx.img.line_len + (x * cub->mlx.img.bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+int	get_texture_pixel(t_img *texture, int x, int y)
+{
+	char	*dest;
+
+	dest = texture->addr + (y * texture->line_len + x * (texture->bpp / 8));
+	return (*(unsigned int *)dest);
 }

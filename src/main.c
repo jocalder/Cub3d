@@ -12,12 +12,6 @@
 
 #include "cubed.h"
 
-static int	handle_close(t_cub *cub)
-{
-	close_program(cub);
-	return (0);
-}
-
 static void	init_data(t_cub *cub)
 {
 	ft_bzero(cub, sizeof(t_cub));

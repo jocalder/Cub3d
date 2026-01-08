@@ -19,19 +19,18 @@ MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
 SRCS =	src/main.c							\
 		src/init/init_data.c				\
-		src/init/init_player.c				\
 		src/parse/parse_cub.c				\
 		src/parse/parse_lines_identifiers.c	\
 		src/parse/parse_cub_utils.cs		\
 		src/render/render_frame.c			\
 		src/render/calculate_steps.c		\
+		src/render/drawing_wall.c 			\
+		src/player/init_player.c			\
+		src/player/player_move.c 			\
+		src/player/player_update.c			\
 		src/utils/utils_1.c					\
 		src/utils/utils_2.c					\
-		src/player_update.c					\
-		src/read_lines.c					\
-		src/player_move.c 					\
-		src/hooks.c 						\
-		src/drawing_wall.c 					\
+		src/keys/hooks.c 					\
 		src/textures.c 						\
 
 

@@ -12,7 +12,7 @@
 
 #include "cubed.h"
 
-void	calculate_wall_x(t_cub *cub)
+static void	calculate_wall_x(t_cub *cub)
 {
 	if (cub->ray.side == 0)
 		cub->ray.wall_x = cub->player.pos_y
@@ -23,7 +23,7 @@ void	calculate_wall_x(t_cub *cub)
 	cub->ray.wall_x = cub->ray.wall_x - (int)cub->ray.wall_x;
 }
 
-t_img	*get_wall_texture(t_cub *cub)
+static t_img	*get_wall_texture(t_cub *cub)
 {
 	if (cub->ray.side == 0)
 	{

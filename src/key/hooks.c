@@ -12,6 +12,16 @@
 
 #include "cubed.h"
 
+static void	close_program(t_cub *cub)
+{
+	if (cub->mlx.img.ptr)
+		mlx_destroy_image(cub->mlx.mlx, cub->mlx.img.ptr);
+	if (cub->mlx.win)
+		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
+	free_map(cub->map.matrix, cub->map.height);
+	exit(0);
+}
+
 int	key_press(int k, t_cub *cub)
 {
 	if (k == W)
@@ -45,5 +55,11 @@ int	key_release(int k, t_cub *cub)
 		cub->keys.left = 0;
 	else if (k == RIGHT)
 		cub->keys.right = 0;
+	return (0);
+}
+
+int	handle_close(t_cub *cub)
+{
+	close_program(cub);
 	return (0);
 }

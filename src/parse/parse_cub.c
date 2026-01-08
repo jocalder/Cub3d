@@ -12,7 +12,7 @@
 
 #include "cubed.h"
 
-static char	**parse_map(char **lines, int start, int *out_height, int *out_width)
+char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 {
 	char	**map;
 	int		i;

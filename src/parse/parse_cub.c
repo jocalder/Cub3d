@@ -12,20 +12,7 @@
 
 #include "cubed.h"
 
-static char	*cpy_map(char *line, int *width)
-{
-	char	*cpy_line;
-
-	if (!line || !width)
-		return (NULL);
-	cpy_line = NULL;
-	cpy_line = line;
-	if ((int)ft_strlen(cpy_line) > *width)
-		*width = (int)ft_strlen(cpy_line);
-	return (cpy_line);
-}
-
-char	**parse_map(char **lines, int start, int *out_height, int *out_width)
+static char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 {
 	char	**map;
 	int		i;
@@ -54,7 +41,20 @@ char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 	return (map);
 }
 
-int	find_map_start(t_map *map, char	**lines)
+static int	parse_lines_identifier(t_map *map, char *line)
+{
+	if (!line)
+		return (0);
+	if (parse_texture_north_and_south(map, line))
+		return (1);
+	if (parse_texture_west_and_east(map, line))
+		return (1);
+	if (parse_floor_and_ceiling(map, line))
+		return (1);
+	return (0);
+}
+
+static int	find_map_start(t_map *map, char	**lines)
 {
 	int		i;
 
@@ -71,12 +71,22 @@ int	find_map_start(t_map *map, char	**lines)
 	return (-1);
 }
 
-void	validate_identifiers(t_map *map)
+static char	**read_lines(int fd)
 {
-	if (!map->no || !map->so || !map->we || !map->ea)
-		exit_error("No textures");
-	if (map->floor_color == -1 || map->ceiling_color == -1)
-		exit_error("No colors");
+	char	**array;
+	char	*line;
+	int		count;
+
+	array = NULL;
+	count = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		array = add_line(array, line, count);
+		count++;
+		line = get_next_line(fd);
+	}
+	return (array);
 }
 
 int	parse_cub(t_cub *cub, char *path)

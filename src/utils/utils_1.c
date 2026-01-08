@@ -24,26 +24,32 @@ void	exit_error(const char *str)
 	exit(1);
 }
 
+char	**add_line(char **array, char *line, int count)
+{
+	char	**new_array;
+	int		i;
+
+	i = 0;
+	new_array = (char **)malloc(sizeof(char *) * (count + 2));
+	if (!new_array)
+		return (NULL);
+	while (i < count)
+	{
+		new_array[i] = array[i];
+		i++;
+	}
+	new_array[count] = line;
+	new_array[count + 1] = NULL;
+	if (array)
+		free(array);
+	return (new_array);
+}
+
 int	is_player_char(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (1);
 	return (0);
-}
-
-void	free_map(char **map, int height)
-{
-	int		i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (i < height && map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }
 
 char	*get_path(char *line)
@@ -58,13 +64,15 @@ char	*get_path(char *line)
 	return (path);
 }
 
-void	put_pixel(t_cub *cub, int x, int y, int color)
+char	*cpy_map(char *line, int *width)
 {
-	char	*dst;
+	char	*cpy_line;
 
-	if (x < 0 || y < 0 || x >= cub->win.width || y >= cub->win.height)
-		return ;
-	dst = cub->mlx.img.addr
-		+ (y * cub->mlx.img.line_len + (x * cub->mlx.img.bpp / 8));
-	*(unsigned int *)dst = color;
+	if (!line || !width)
+		return (NULL);
+	cpy_line = NULL;
+	cpy_line = line;
+	if ((int)ft_strlen(cpy_line) > *width)
+		*width = (int)ft_strlen(cpy_line);
+	return (cpy_line);
 }

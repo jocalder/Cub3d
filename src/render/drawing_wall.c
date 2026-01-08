@@ -36,7 +36,7 @@ t_img	*get_wall_texture(t_cub *cub)
 	return (&cub->textures[TEX_NORTH]);
 }
 
-void	draw_textured_column(t_cub *cub, int x)
+static void	draw_textured_column(t_cub *cub, int x)
 {
 	int		y;
 	int		texture_x;

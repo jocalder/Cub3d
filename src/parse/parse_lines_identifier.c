@@ -12,7 +12,24 @@
 
 #include "cubed.h"
 
-int	parse_color(char *str)
+static int	parse_value(char **str)
+{
+	int		value;
+
+	value = 0;
+	if (!ft_isdigit(**str))
+		return (-1);
+	while (ft_isdigit(**str))
+	{
+		value = value * 10 + (**str - '0');
+		(*str)++;
+	}
+	if (value < 0 || value > 255)
+		return (-1);
+	return (value);
+}
+
+static int	parse_color(char *str)
 {
 	int		r;
 	int		g;
@@ -40,7 +57,7 @@ int	parse_color(char *str)
 	return ((r << 16) | (g << 8) | b);
 }
 
-static int	parse_texture_north_and_south(t_map *map, char *line)
+int	parse_texture_north_and_south(t_map *map, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
@@ -59,7 +76,7 @@ static int	parse_texture_north_and_south(t_map *map, char *line)
 	return (0);
 }
 
-static int	parse_texture_west_and_east(t_map *map, char *line)
+int	parse_texture_west_and_east(t_map *map, char *line)
 {
 	if (ft_strncmp(line, "WE ", 3) == 0)
 	{
@@ -78,7 +95,7 @@ static int	parse_texture_west_and_east(t_map *map, char *line)
 	return (0);
 }
 
-static int	parse_floor_and_ceiling(t_map *map, char *line)
+int	parse_floor_and_ceiling(t_map *map, char *line)
 {
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
@@ -98,18 +115,5 @@ static int	parse_floor_and_ceiling(t_map *map, char *line)
 			exit_error("Invalid ceiling color");
 		return (1);
 	}
-	return (0);
-}
-
-int	parse_lines_identifier(t_map *map, char *line)
-{
-	if (!line)
-		return (0);
-	if (parse_texture_north_and_south(map, line))
-		return (1);
-	if (parse_texture_west_and_east(map, line))
-		return (1);
-	if (parse_floor_and_ceiling(map, line))
-		return (1);
 	return (0);
 }

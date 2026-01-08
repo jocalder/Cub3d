@@ -12,7 +12,7 @@
 
 #include "cubed.h"
 
-void	calculate_delta(t_cub *cub)
+static void	calculate_delta(t_cub *cub)
 {
 	if (cub->ray.dir_x == 0)
 		cub->ray.delta_x = 1e30;
@@ -24,7 +24,7 @@ void	calculate_delta(t_cub *cub)
 		cub->ray.delta_y = fabs(1 / cub->ray.dir_y);
 }
 
-void	init_dda(t_cub *cub)
+static void	init_dda(t_cub *cub)
 {
 	int		hit;
 
@@ -50,7 +50,7 @@ void	init_dda(t_cub *cub)
 	}
 }
 
-void	init_ray(t_cub *cub, int x)
+static void	init_ray(t_cub *cub, int x)
 {
 	cub->ray.camera_x = 2.0 * x / cub->win.width - 1;
 	cub->ray.dir_x = cub->player.dir_x
@@ -63,7 +63,7 @@ void	init_ray(t_cub *cub, int x)
 	calculate_step(cub);
 }
 
-void	raycast(t_cub *cub)
+static void	raycast(t_cub *cub)
 {
 	int		x;
 

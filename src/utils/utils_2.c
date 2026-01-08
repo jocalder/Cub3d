@@ -12,6 +12,14 @@
 
 #include "cubed.h"
 
+void	validate_identifiers(t_map *map)
+{
+	if (!map->no || !map->so || !map->we || !map->ea)
+		exit_error("No textures");
+	if (map->floor_color == -1 || map->ceiling_color == -1)
+		exit_error("No colors");
+}
+
 int	is_walkable(t_map *map, double x, double y)
 {
 	int		map_x;
@@ -38,19 +46,28 @@ void	close_program(t_cub *cub)
 	exit(0);
 }
 
-int	parse_value(char **str)
+void	free_map(char **map, int height)
 {
-	int		value;
+	int		i;
 
-	value = 0;
-	if (!ft_isdigit(**str))
-		return (-1);
-	while (ft_isdigit(**str))
+	i = 0;
+	if (!map)
+		return ;
+	while (i < height && map[i])
 	{
-		value = value * 10 + (**str - '0');
-		(*str)++;
+		free(map[i]);
+		i++;
 	}
-	if (value < 0 || value > 255)
-		return (-1);
-	return (value);
+	free(map);
+}
+
+void	put_pixel(t_cub *cub, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || y < 0 || x >= cub->win.width || y >= cub->win.height)
+		return ;
+	dst = cub->mlx.img.addr
+		+ (y * cub->mlx.img.line_len + (x * cub->mlx.img.bpp / 8));
+	*(unsigned int *)dst = color;
 }

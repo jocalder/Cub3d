@@ -28,6 +28,27 @@ static void	init_data(t_cub *cub)
 	init_keys(&cub->keys);
 }
 
+static void	load_texture(t_cub *cub, t_img *texture, char *path)
+{
+	texture->ptr = mlx_xpm_file_to_image(cub->mlx.mlx,
+			path, &texture->width, &texture->height);
+	if (!texture->ptr)
+		exit_error("Error loading texture");
+	texture->addr = mlx_get_data_addr(texture->ptr,
+			&texture->bpp, &texture->line_len, &texture->endian);
+}
+
+static void	load_all_textures(t_cub *cub)
+{
+	if (!cub->map.no || !cub->map.so || !cub->map.we
+		|| !cub->map.ea)
+		exit_error("Missing textures path");
+	load_texture(cub, &cub->textures[TEX_NORTH], cub->map.no);
+	load_texture(cub, &cub->textures[TEX_SOUTH], cub->map.so);
+	load_texture(cub, &cub->textures[TEX_WEST], cub->map.we);
+	load_texture(cub, &cub->textures[TEX_EAST], cub->map.ea);
+}
+
 static void	init_mlx(t_cub *cub)
 {
 	cub->mlx.mlx = mlx_init();

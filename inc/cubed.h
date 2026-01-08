@@ -158,21 +158,26 @@ void	init_raycasting(t_ray *ray);
 void	init_window(t_win *window);
 void	init_keys(t_keys *keys);
 
-/*PARSER*/
-char	**read_lines(int fd);
+void	init_player(t_cub *cub, t_map *map);
+∫
+/*PARSE*/
 int		parse_cub(t_cub *cub, char *path);
-char	**parse_map(char **lines, int start, int *out_height, int *out_width);
-void	validate_identifiers(t_map *map);
-int		find_map_start(t_map *map, char	**lines);
+int		parse_texture_north_and_south(t_map *map, char *line);
+int		parse_texture_west_and_east(t_map *map, char *line);
+int		parse_floor_and_ceiling(t_map *map, char *line);
+
+/*PARSE_UTILS*/
 void	padding_rows(t_map *map);
+void	validate_identifiers(t_map *map);
 int		map_check(t_cub *cub);
 
-int		parse_lines_identifier(t_map *map, char *line);
-int		parse_color(char *str);
-
 /*PLAYER*/
-int		validate_player(t_map *map, int *pos_x, int *pos_y);
-void	init_player(t_cub *cub, t_map *map);
+
+/*RENDER*/
+int		render_frame(t_cub *cub);
+void	calculate_step(t_cub *cub);
+
+
 void	move_forward(t_cub *cub);
 void	move_backward(t_cub *cub);
 void	move_left(t_cub *cub);
@@ -180,31 +185,27 @@ void	move_right(t_cub *cub);
 void	update_player(t_cub *cub);
 
 /*RENDERING AND RAYCASTING*/
+
 void	put_pixel(t_cub *cub, int x, int y, int color);
-void	load_all_textures(t_cub *cub);
-void	load_texture(t_cub *cub, t_img *texture, char *path);
 int		get_texture_pixel(t_img *texture, int x, int y);
 void	calculate_wall_x(t_cub *cub);
 t_img	*get_wall_texture(t_cub *cub);
 void	draw_textured_column(t_cub *cub, int x);
 void	draw_column(t_cub *cub, int x);
 void	calculate_wall(t_cub *cub);
-void	calculate_delta(t_cub *cub);
-void	calculate_step(t_cub *cub);
-void	init_dda(t_cub *cub);
-void	init_ray(t_cub *cub, int x);
-void	raycast(t_cub *cub);
-int		render_frame(t_cub *cub);
-
+∫
 /*KEYS*/
 int		key_press(int k, t_cub *cub);
 int		key_release(int k, t_cub *cub);
 
 /*UTILS*/
 void	exit_error(const char *str);
-void	free_map(char **map, int height);
+char	**add_line(char **array, char *line, int count);
 int		is_player_char(char c);
 char	*get_path(char *line);
+char	*cpy_map(char *line, int *width)
+
+void	free_map(char **map, int height);
 int		is_walkable(t_map *map, double x, double y);
 void	close_program(t_cub *cub);
 int		parse_value(char **str);

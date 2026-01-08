@@ -12,7 +12,7 @@
 
 #include "cubed.h"
 
-int	validate_player(t_map *map, int *pos_x, int *pos_y)
+static int	validate_player(t_map *map, int *pos_x, int *pos_y)
 {
 	int		x;
 	int		y;

@@ -17,22 +17,22 @@ LIBFT = libft/libft.a
 MINILIBX = minilibx/libmlx_Linux.a
 MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 
-SRCS =	src/main.c						\
-		src/init_data.c					\
-		src/utils.c						\
-		src/player_update.c				\
-		src/init_player.c				\
-		src/utils1.c 					\
-		src/parse_lines_identifiers.c	\
-		src/read_lines.c				\
-		src/parser_cub.c				\
-		src/validate_map.c 				\
-		src/player_move.c 				\
-		src/hooks.c 					\
-		src/drawing_wall.c 				\
-		src/calculate_steps.c			\
-		src/raycasting.c 				\
-		src/textures.c 					\
+SRCS =	src/main.c							\
+		src/init/init_data.c				\
+		src/init/init_player.c				\
+		src/parse/parse_cub.c				\
+		src/parse/parse_lines_identifiers.c	\
+		src/parse/parse_cub_utils.cs		\
+		src/render/render_frame.c			\
+		src/render/calculate_steps.c		\
+		src/utils/utils_1.c					\
+		src/utils/utils_2.c					\
+		src/player_update.c					\
+		src/read_lines.c					\
+		src/player_move.c 					\
+		src/hooks.c 						\
+		src/drawing_wall.c 					\
+		src/textures.c 						\
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)

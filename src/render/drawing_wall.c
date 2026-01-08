@@ -52,18 +52,18 @@ static void	draw_textured_column(t_cub *cub, int x)
 	if (cub->ray.line_height == 0)
 		return ;
 	step = (double)tex->height / (double)cub->ray.line_height;
-	cub->ray.wall_x = (cub->ray.draw_start - cub->win.height / 2
+	cub->ray.tex_pos = (cub->ray.draw_start - cub->win.height / 2
 			+ cub->ray.line_height / 2) * step;
 	y = cub->ray.draw_start;
 	while (y <= cub->ray.draw_end)
 	{
-		int texture_y = (int)cub->ray.wall_x;
-		if (texture_y < 0)
-			texture_y = 0;
-		if (texture_y >= tex->height)
-			texture_y = tex->height - 1;
-		put_pixel(cub, x, y, get_texture_pixel(tex, texture_x, texture_y));
-		cub->ray.wall_x += step;
+		cub->ray.tex_y = (int)cub->ray.tex_pos;
+		if (cub->ray.tex_y < 0)
+			cub->ray.tex_y = 0;
+		if (cub->ray.tex_y >= tex->height)
+			cub->ray.tex_y = tex->height - 1;
+		put_pixel(cub, x, y, get_texture_pixel(tex, texture_x, cub->ray.tex_y));
+		cub->ray.tex_pos += step;
 		y++;
 	}
 }

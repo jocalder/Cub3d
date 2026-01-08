@@ -120,6 +120,8 @@ typedef struct s_ray
 	double		delta_x;
 	double		delta_y;
 	double		wall_dist;
+	double		tex_pos;
+	int			tex_y;
 	double		wall_x;
 	int			side;
 	int			line_height;

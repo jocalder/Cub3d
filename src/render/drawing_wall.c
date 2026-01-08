@@ -38,12 +38,10 @@ static t_img	*get_wall_texture(t_cub *cub)
 
 static void	draw_textured_column(t_cub *cub, int x)
 {
+	t_img	*tex;
 	int		y;
 	int		texture_x;
-	int		texture_y;
-	t_img	*tex;
 	double	step;
-	double	tex_pos;
 
 	tex = get_wall_texture(cub);
 	calculate_wall_x(cub);
@@ -54,19 +52,18 @@ static void	draw_textured_column(t_cub *cub, int x)
 	if (cub->ray.line_height == 0)
 		return ;
 	step = (double)tex->height / (double)cub->ray.line_height;
-	tex_pos = (cub->ray.draw_start - cub->win.height / 2
+	cub->ray.wall_x = (cub->ray.draw_start - cub->win.height / 2
 			+ cub->ray.line_height / 2) * step;
 	y = cub->ray.draw_start;
 	while (y <= cub->ray.draw_end)
 	{
-		texture_y = (int)tex_pos;
+		int texture_y = (int)cub->ray.wall_x;
 		if (texture_y < 0)
 			texture_y = 0;
 		if (texture_y >= tex->height)
 			texture_y = tex->height - 1;
-		put_pixel(cub, x, y,
-			get_texture_pixel(tex, texture_x, texture_y));
-		tex_pos += step;
+		put_pixel(cub, x, y, get_texture_pixel(tex, texture_x, texture_y));
+		cub->ray.wall_x += step;
 		y++;
 	}
 }

@@ -39,10 +39,6 @@ void	update_player(t_cub *cub)
 		move_left(cub);
 	if (cub->keys.d)
 		move_right(cub);
-	if (cub->keys.up)
-		move_forward(cub);
-	if (cub->keys.down)
-		move_backward(cub);
 	if (cub->keys.left)
 		rotate_player(cub, -ROT_SPEED);
 	if (cub->keys.right)

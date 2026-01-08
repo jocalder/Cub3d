@@ -160,7 +160,7 @@ void	init_keys(t_keys *keys);
 
 /*PARSE*/
 int		parse_cub(t_cub *cub, char *path);
-char	**parse_map(char **lines, int start, int *out_height, int *out_width)
+char	**parse_map(char **lines, int start, int *out_height, int *out_width);
 int		map_check(t_cub *cub);
 void	padding_rows(t_map *map);
 int		parse_texture_north_and_south(t_map *map, char *line);
@@ -169,6 +169,7 @@ int		parse_floor_and_ceiling(t_map *map, char *line);
 
 /*PLAYER*/
 void	init_player(t_cub *cub, t_map *map);
+int		validate_player(t_map *map, int *pos_x, int *pos_y);
 void	move_forward(t_cub *cub);
 void	move_backward(t_cub *cub);
 void	move_left(t_cub *cub);
@@ -195,7 +196,7 @@ char	*cpy_map(char *line, int *width);
 void	validate_identifiers(t_map *map);
 int		is_walkable(t_map *map, double x, double y);
 void	free_map(char **map, int height);
-void	put_pixel(t_cub *cub, int x, int y, int color);;
+void	put_pixel(t_cub *cub, int x, int y, int color);
 int		get_texture_pixel(t_img *texture, int x, int y);
 
 #endif

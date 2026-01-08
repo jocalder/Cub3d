@@ -20,8 +20,8 @@ MLX_FLAGS = -L minilibx -lmlx -lXext -lX11 -lm -lbsd
 SRCS =	src/main.c							\
 		src/init/init_data.c				\
 		src/parse/parse_cub.c				\
-		src/parse/parse_lines_identifiers.c	\
-		src/parse/parse_cub_utils.cs		\
+		src/parse/parse_lines_identifier.c	\
+		src/parse/parse_cub_utils.c		\
 		src/render/render_frame.c			\
 		src/render/calculate_steps.c		\
 		src/render/drawing_wall.c 			\
@@ -31,7 +31,6 @@ SRCS =	src/main.c							\
 		src/utils/utils_1.c					\
 		src/utils/utils_2.c					\
 		src/keys/hooks.c 					\
-		src/textures.c 						\
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)
@@ -52,6 +51,7 @@ objs:
 	@mkdir -p objs
 
 objs/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

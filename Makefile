@@ -21,7 +21,7 @@ SRCS =	src/main.c							\
 		src/init/init_data.c				\
 		src/parse/parse_cub.c				\
 		src/parse/parse_lines_identifier.c	\
-		src/parse/parse_cub_utils.c		\
+		src/parse/parse_cub_utils.c			\
 		src/render/render_frame.c			\
 		src/render/calculate_steps.c		\
 		src/render/drawing_wall.c 			\

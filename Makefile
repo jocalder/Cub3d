@@ -6,8 +6,8 @@ CLEAR	=	\r\033[K
 NAME = cub3d
 
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I libft
 CFLAGS += -I inc
 CFLAGS += -I minilibx

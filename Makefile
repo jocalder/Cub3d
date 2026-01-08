@@ -9,7 +9,7 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 CFLAGS += -I libft
-CFLAGS += -I include
+CFLAGS += -I inc
 CFLAGS += -I minilibx
 
 

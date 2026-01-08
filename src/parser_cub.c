@@ -12,6 +12,20 @@
 
 #include "cubed.h"
 
+static char	**cpy_map(char *line, int *width, int *height)
+{
+	char	*cpy_line;
+
+	if (!line || !width || !height)
+		return (NULL);
+	cpy_line = NULL;
+	cpy_line = line;
+	if ((int)ft_strlen(cpy_line) > *width)
+		*width = (int)ft_strlen(cpy_line);
+	*height++;
+	return (cpy_line);
+}
+
 char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 {
 	char	**map;
@@ -32,12 +46,14 @@ char	**parse_map(char **lines, int start, int *out_height, int *out_width)
 	height = 0;
 	width = 0;
 	while (lines[++i])
-	{
-		map[height] = ft_strdup(lines[i]);
-		if ((int)ft_strlen(map[height]) > width)
-			width = (int)ft_strlen(map[height]);
-		height++;
-	}
+		map[height] = cpy_map(ft_strdup(line[i]), &width, &height)
+	// while (lines[++i])
+	// {
+	// 	map[height] = ft_strdup(lines[i]);
+	// 	if ((int)ft_strlen(map[height]) > width)
+	// 		width = (int)ft_strlen(map[height]);
+	// 	height++;
+	// }
 	*out_height = height;
 	*out_width = width;
 	return (map);

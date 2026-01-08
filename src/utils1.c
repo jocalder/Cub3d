@@ -12,20 +12,6 @@
 
 #include "cubed.h"
 
-void	print_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	printf("\n--- MAP (%dx%d) ---\n", map->width, map->height);
-	while (i < map->height)
-	{
-		printf("%s\n", map->matrix[i]);
-		i++;
-	}
-	printf("\n");
-}
-
 int	is_walkable(t_map *map, double x, double y)
 {
 	int		map_x;

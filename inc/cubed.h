@@ -205,7 +205,6 @@ void	exit_error(const char *str);
 void	free_map(char **map, int height);
 int		is_player_char(char c);
 char	*get_path(char *line);
-void	print_map(t_map *map);
 int		is_walkable(t_map *map, double x, double y);
 void	close_program(t_cub *cub);
 int		parse_value(char **str);

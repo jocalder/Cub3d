@@ -104,6 +104,5 @@ int	parse_cub(t_cub *cub, char *path)
 	padding_rows(&cub->map);
 	map_check(cub);
 	init_player(cub, &cub->map);
-	print_map(&cub->map);
 	return (0);
 }

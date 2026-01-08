@@ -28,12 +28,12 @@ t_img	*get_wall_texture(t_cub *cub)
 	if (cub->ray.side == 0)
 	{
 		if (cub->ray.dir_x > 0)
-			return (&cub->textures[TEX_WEST]);
-		return (&cub->textures[TEX_EAST]);
+			return (&cub->textures[TEX_EAST]);
+		return (&cub->textures[TEX_WEST]);
 	}
 	if (cub->ray.dir_y > 0)
-		return (&cub->textures[TEX_NORTH]);
-	return (&cub->textures[TEX_SOUTH]);
+		return (&cub->textures[TEX_SOUTH]);
+	return (&cub->textures[TEX_NORTH]);
 }
 
 void	draw_textured_column(t_cub *cub, int x)

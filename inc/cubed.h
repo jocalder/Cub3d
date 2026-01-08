@@ -28,8 +28,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define WIDTH		1280
-# define HEIGHT		720
+# define WIDTH		960
+# define HEIGHT		540
 # define POINT_SIZE	8
 
 # define W	119

@@ -91,27 +91,27 @@ static int	check_map_borders(t_map *map)
 	return (0);
 }
 
-static void	flood_fill(char **map, int height, int width, int y, int x, int *error)
+static void	flood_fill(t_map map, int y, int x, int *error)
 {
 	if (*error)
 		return ;
-	if (y < 0 || y >= height || x < 0 || x >= width)
+	if (y < 0 || y >= map.height || x < 0 || x >= map.width)
 	{
 		*error = 1;
 		return ;
 	}
-	if (map[y][x] == ' ' || map[y][x] == '\0')
+	if (map.cpy_map[y][x] == ' ' || map.cpy_map[y][x] == '\0')
 	{
 		*error = 1;
 		return ;
 	}
-	if (map[y][x] == '1' || map[y][x] == 'F')
+	if (map.cpy_map[y][x] == '1' || map.cpy_map[y][x] == 'F')
 		return ;
-	map[y][x] = 'F';
-	flood_fill(map, height, width, y + 1, x, error);
-	flood_fill(map, height, width, y - 1, x, error);
-	flood_fill(map, height, width, y, x + 1, error);
-	flood_fill(map, height, width, y, x - 1, error);
+	map.cpy_map[y][x] = 'F';
+	flood_fill(map, y + 1, x, error);
+	flood_fill(map, y - 1, x, error);
+	flood_fill(map, y, x + 1, error);
+	flood_fill(map, y, x - 1, error);
 }
 
 int	map_check(t_cub *cub)
@@ -119,18 +119,17 @@ int	map_check(t_cub *cub)
 	int		pos_x;
 	int		pos_y;
 	int		error;
-	char	**copy_map;
 
 	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");
 	if (check_map_borders(&cub->map) != 0)
 		exit_error("Map has open borders");
-	copy_map = dup_map(cub->map.matrix, cub->map.height);
-	if (!copy_map)
+	cub->map.cpy_map = dup_map(cub->map.matrix, cub->map.height);
+	if (!cub->map.cpy_map)
 		exit_error("Copy map to check failed");
 	error = 0;
-	flood_fill(copy_map, cub->map.height, cub->map.width, pos_y, pos_x, &error);
-	free_map(copy_map, cub->map.height);
+	flood_fill(cub->map, pos_y, pos_x, &error);
+	free_map(cub->map.cpy_map, cub->map.height);
 	if (error)
 		exit_error("Map is not closed");
 	return (0);

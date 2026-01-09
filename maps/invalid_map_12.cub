@@ -1,0 +1,13 @@
+F 220,100,0  
+C 225,30,0
+
+NO ./textures/quake/MetalPanel-01V_64.xpm
+SO ./textures/quake/MetalPanel-01_64.xpm
+WE ./textures/quake/CorrugatedMetalPanel-01V_64.xpm
+EA ./textures/quake/ConcretePanel-01_64.xpm
+
+11111 11111 11111
+10001 10001 10001
+10N01 10001 10W01
+10001 10001 10001
+11111 11111 11111

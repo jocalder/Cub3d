@@ -66,8 +66,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_error("Usage: ./cub3d <map.cub>");
 	init_data(&cub);
-	if (ft_strlen(argv[1]) < 4 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4],
-		".cub", 4) != 0)
+	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4],".cub", 4) != 0)
 		exit_error("Please use a valid map");
 	if (parse_cub(&cub, argv[1]) != 0)
 		exit_error("Please use a valid map");

@@ -1,10 +1,10 @@
-NO textures/wolfenstein/adolf.xpm						
+NO ./textures/quake/MetalPanel-01V_64.xpm
+
+SO ./textures/quake/MetalPanel-01_64.xpm		
+WE ./textures/quake/CorrugatedMetalPanel-01V_64.xpm
 
 
-SO textures/wolfenstein/blue_stone.xpm
-WE textures/wolfenstein/grey_stone.xpm
-
-EA textures/wolfenstein/mossy.xpm
+EA ./textures/quake/ConcretePanel-01_64.xpm
 
 C 153,204,255	
 F 164,169,20

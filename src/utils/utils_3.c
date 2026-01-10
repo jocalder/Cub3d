@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:21:53 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2026/01/10 14:23:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2026/01/10 13:26:39 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	is_spacetab(int c)
 {
 	if (c == 32 || c >= 9 && c <= 13)
-		return (1)
+		return (1);
 	return (0);
 }

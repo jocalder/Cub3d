@@ -200,5 +200,6 @@ int		is_walkable(t_map *map, double x, double y);
 void	free_map(char **map, int height);
 void	put_pixel(t_cub *cub, int x, int y, int color);
 int		get_texture_pixel(t_img *texture, int x, int y);
+int		is_spacetab(int c);
 
 #endif

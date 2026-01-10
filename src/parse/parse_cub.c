@@ -57,6 +57,7 @@ static int	parse_lines_identifier(t_map *map, char *line)
 static int	find_map_start(t_map *map, char	**lines)
 {
 	int		i;
+	int		j;
 
 	if (!lines)
 		return (-1);
@@ -64,9 +65,14 @@ static int	find_map_start(t_map *map, char	**lines)
 	while (lines[i])
 	{
 		if (parse_lines_identifier(map, lines[i]) == 1)
-			;
-		else if (lines[i][0] == ' ' || lines[i][0] == '1' || lines[i][0] == '0'
-				|| is_player_char(lines[i][0]))
+		{
+			i++;
+			continue ;
+		}
+		j = 0;
+		while (is_spacetab(lines[i][j]))
+			j++;
+		if (lines[i][0] == '1' || lines[i][0] == '0')
 			return (i);
 		i++;
 	}

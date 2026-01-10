@@ -28,9 +28,10 @@ SRCS =	src/main.c							\
 		src/player/init_player.c			\
 		src/player/player_move.c 			\
 		src/player/player_update.c			\
+		src/keys/hooks.c 					\
 		src/utils/utils_1.c					\
 		src/utils/utils_2.c					\
-		src/keys/hooks.c 					\
+		src/utils/utils_3.c					\
 
 
 OBJS = $(SRCS:src/%.c=objs/%.o)

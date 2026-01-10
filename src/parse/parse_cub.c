@@ -72,7 +72,8 @@ static int	find_map_start(t_map *map, char	**lines)
 		j = 0;
 		while (is_spacetab(lines[i][j]))
 			j++;
-		if (lines[i][j] == '1' || lines[i][j] == '0')
+		if (lines[i][j] == '1' || lines[i][j] == '0'
+				|| is_player_char(lines[i][j]))
 			return (i);
 		i++;
 	}

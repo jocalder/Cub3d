@@ -72,7 +72,7 @@ static int	find_map_start(t_map *map, char	**lines)
 		j = 0;
 		while (is_spacetab(lines[i][j]))
 			j++;
-		if (lines[i][0] == '1' || lines[i][0] == '0')
+		if (lines[i][j] == '1' || lines[i][j] == '0')
 			return (i);
 		i++;
 	}

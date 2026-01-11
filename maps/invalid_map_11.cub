@@ -6,8 +6,8 @@ SO ./textures/quake/MetalPanel-01_64.xpm
 WE ./textures/quake/CorrugatedMetalPanel-01V_64.xpm
 EA ./textures/quake/ConcretePanel-01_64.xpm
 
-11111 11111 11111
-10001 10001 10001
-10N01 10001 10001
-10001 10001 10001
-1111  11111 11111
+ 111
+10001
+10N01
+10001
+ 111 

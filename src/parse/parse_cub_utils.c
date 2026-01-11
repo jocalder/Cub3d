@@ -71,20 +71,18 @@ static int	check_map_borders(t_map *map)
 	i = 0;
 	while (i < map->width)
 	{
-		if (map->matrix[0][i] == '0' || is_player_char(map->matrix[0][i]))
+		if (map->matrix[0][i] != '1')
 			return (-1);
-		if (map->matrix[map->height - 1][i] == '0' ||
-			is_player_char(map->matrix[map->height - 1][i]))
+		if (map->matrix[map->height - 1][i] != '1')
 			return (-1);
 		i++;
 	}
 	i = 0;
 	while (i < map->height)
 	{
-		if (map->matrix[i][0] == '0' || is_player_char(map->matrix[i][0]))
+		if (map->matrix[i][0] != '1')
 			return (-1);
-		if (map->matrix[i][map->width - 1] == '0' ||
-			is_player_char(map->matrix[i][map->width - 1]))
+		if (map->matrix[i][map->width - 1] != '1')
 			return (-1);
 		i++;
 	}

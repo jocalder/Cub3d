@@ -1,0 +1,33 @@
+NO ./textures/quake/MetalPanel-01V_64.xpm
+SO ./textures/quake/MetalPanel-01_64.xpm
+WE ./textures/quake/CorrugatedMetalPanel-01V_64.xpm
+EA ./textures/quake/ConcretePanel-01_64.xpm
+
+F 40,40,40                
+C 10,10,0
+
+           11111
+           10001
+           10001
+           10001
+           11011
+            101
+            101
+            101
+            101
+            101
+11111      11011     11111
+10001111111100011111110001
+100000000000N000000000001
+10001111111100011111110001
+11111      11011     11111
+            101
+            101
+            101
+            101
+            101
+           11011
+           10001
+           10001
+           10001
+           11111

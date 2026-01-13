@@ -203,5 +203,6 @@ int		get_texture_pixel(t_img *texture, int x, int y);
 int		is_spacetab(int c);
 char	**dup_map(char **src, int height);
 int		validate_characters(t_map *map);
+void	flood_fill(t_map map, int y, int x, int *error);
 
 #endif

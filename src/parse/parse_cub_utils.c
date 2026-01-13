@@ -37,6 +37,46 @@ void	padding_rows(t_map *map)
 	}
 }
 
+static int	check_side_width(char **map, int i, int side)
+{
+	if (!map)
+		return (-1);
+	if (map[0][i] == '0' || is_player_char(map[0][i]))
+		return (-1);
+	if (is_spacetab(map[0][i])
+		&& (side > 1 && map[1][i] == '0'
+		|| is_player_char(map[1][i])))
+		return (-1);
+	if (map[side - 1][i] == '0'
+		|| is_player_char(map[side - 1][i]))
+		return (-1);
+	if (is_spacetab(map[side - 1][i])
+		&& (side > 1 && map[side - 2][i] == '0'
+		|| is_player_char(map[side - 2][i])))
+		return (-1);
+	return (0);
+}
+
+static int	check_side_height(char **map, int i, int side)
+{
+	if (!map)
+		return (-1);
+	if (map[i][0] == '0' || is_player_char(map[i][0]))
+		return (-1);
+	if (is_spacetab(map[i][0])
+		&& (side > 1 && (map[i][1] == '0'
+		|| is_player_char(map[i][1]))))
+		return (-1);
+	if (map[i][side - 1] == '0'
+		|| is_player_char(map[i][side - 1]))
+		return (-1);
+	if (is_spacetab(map[i][side - 1])
+		&& (side > 1 && map[i][side - 2] == '0'
+		|| is_player_char(map[i][side - 2])))
+		return (-1);
+	return (0);
+}
+
 static int	check_map_borders(t_map *map)
 {
 	int	i;
@@ -44,66 +84,18 @@ static int	check_map_borders(t_map *map)
 	i = 0;
 	while (i < map->width)
 	{
-		if (map->matrix[0][i] == '0' || is_player_char(map->matrix[0][i]))
+		if (check_side_width(map->matrix, i, map->height) != 0)
 			return (-1);
-		if (is_spacetab(map->matrix[0][i]))
-		{
-			if (map->height > 1 && (map->matrix[1][i] == '0' || is_player_char(map->matrix[1][i])))
-				return (-1);
-		}
-		if (map->matrix[map->height - 1][i] == '0' ||
-			is_player_char(map->matrix[map->height - 1][i]))
-			return (-1);
-		if (is_spacetab(map->matrix[map->height - 1][i]))
-		{
-			if (map->height > 1 && (map->matrix[map->height - 2][i] == '0' || is_player_char(map->matrix[map->height - 2][i])))
-				return (-1);
-		}
 		i++;
 	}
 	i = 0;
 	while (i > map->height)
 	{
-		if (map->matrix[i][0] == 0 || is_player_char(map->matrix[i][0]))
+		if (check_side_height(map->matrix, i, map->width) != 0)
 			return (-1);
-		if (is_spacetab(map->matrix[i][0]))
-		{
-			if (map->width > 1 && (map->matrix[i][1] == '0' || is_player_char(map->matrix[i][1])))
-				return (-1);
-		}
-		if (map->matrix[i][map->width - 1] == '0' || is_player_char(map->matrix[i][map->width - 1]))
-			return (-1);
-		if (is_spacetab(map->matrix[i][map->width - 1]))
-		{
-			if (map->width > 1 && (map->matrix[i][map->width - 2] == '0' || is_player_char(map->matrix[i][map->width - 2])))
-				return (-1);
-		}
 		i++;
 	}
 	return (0);
-}
-
-static void	flood_fill(t_map map, int y, int x, int *error)
-{
-	if (*error)
-		return ;
-	if (y < 0 || y >= map.height || x < 0 || x >= map.width)
-	{
-		*error = 1;
-		return ;
-	}
-	if (map.cpy_map[y][x] == ' ' || map.cpy_map[y][x] == '\0')
-	{
-		*error = 1;
-		return ;
-	}
-	if (map.cpy_map[y][x] == '1' || map.cpy_map[y][x] == 'F')
-		return ;
-	map.cpy_map[y][x] = 'F';
-	flood_fill(map, y + 1, x, error);
-	flood_fill(map, y - 1, x, error);
-	flood_fill(map, y, x + 1, error);
-	flood_fill(map, y, x - 1, error);
 }
 
 int	map_check(t_cub *cub)

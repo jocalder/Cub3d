@@ -85,25 +85,23 @@ static char	**dup_map(char **src, int height)
 
 static int	check_map_borders(t_map *map)
 {
-	int	i;
+	int	y;
+	int	x;
 
-	i = 0;
-	while (i < map->width)
+	y = 0;
+	while (y < map->height)
 	{
-		if (map->matrix[0][i] != '1')
-			return (-1);
-		if (map->matrix[map->height - 1][i] != '1')
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while (i < map->height)
-	{
-		if (map->matrix[i][0] != '1')
-			return (-1);
-		if (map->matrix[i][map->width - 1] != '1')
-			return (-1);
-		i++;
+		x = 0;
+		while (x < map->width)
+		{
+			if ((y == 0 || y == map->height - 1 || x == 0 || x == map->width - 1))
+			{
+				if (map->matrix[y][x] == '0' || is_player_char(map->matrix[y][x]))
+					return (-1);
+			}
+			x++;
+		}
+		y++;
 	}
 	return (0);
 }

@@ -40,48 +40,42 @@ void	padding_rows(t_map *map)
 static int	check_map_borders(t_map *map)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (i < map->height)
+	while (i < map->width)
 	{
-		j = 0;
-		while (j < map->width)
+		if (map->matrix[0][i] == '0' || is_player_char(map->matrix[0][i]))
+			return (-1);
+		if (is_spacetab(map->matrix[0][i]))
 		{
-			if (map->height > 1 && (map->matrix[1][i] == '0'
-				|| is_player_char(map->matrix[1][i])))
+			if (map->height > 1 && (map->matrix[1][i] == '0' || is_player_char(map->matrix[1][i])))
 				return (-1);
-			j++;
 		}
 		if (map->matrix[map->height - 1][i] == '0' ||
 			is_player_char(map->matrix[map->height - 1][i]))
 			return (-1);
-		if (map->matrix[map->height - 1][i] == ' ')
+		if (is_spacetab(map->matrix[map->height - 1][i]))
 		{
-			if (map->height > 1 && (map->matrix[map->height - 2][i] == '0'
-				|| is_player_char(map->matrix[map->height - 2][i])))
+			if (map->height > 1 && (map->matrix[map->height - 2][i] == '0' || is_player_char(map->matrix[map->height - 2][i])))
 				return (-1);
 		}
 		i++;
 	}
 	i = 0;
-	while (i < map->height)
+	while (i > map->height)
 	{
-		if (map->matrix[i][0] == '0' || is_player_char(map->matrix[i][0]))
+		if (map->matrix[i][0] == 0 || is_player_char(map->matrix[i][0]))
 			return (-1);
-		if (map->matrix[i][0] == ' ')
+		if (is_spacetab(map->matrix[i][0]))
 		{
-			if (map->width > 1 && (map->matrix[i][1] == '0'
-				|| is_player_char(map->matrix[i][1])))
+			if (map->width > 1 && (map->matrix[i][1] == '0' || is_player_char(map->matrix[i][1])))
 				return (-1);
 		}
-		if (map->matrix[i][map->width - 1] == '0' ||
-			is_player_char(map->matrix[i][map->width - 1]))
+		if (map->matrix[i][map->width - 1] == '0' || is_player_char(map->matrix[i][map->width - 1]))
 			return (-1);
-		if (map->matrix[i][map->width - 1] == ' ')
+		if (is_spacetab(map->matrix[i][map->width - 1]))
 		{
-			if (map->width > 1 && (map->matrix[i][map->width - 2] == '0'
-				|| is_player_char(map->matrix[i][map->width - 2])))
+			if (map->width > 1 && (map->matrix[i][map->width - 2] == '0' || is_player_char(map->matrix[i][map->width - 2])))
 				return (-1);
 		}
 		i++;

@@ -94,16 +94,63 @@ static int	check_map_borders(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if ((y == 0 || y == map->height - 1 || x == 0 || x == map->width - 1))
-			{
-				if (map->matrix[y][x] == '0' || is_player_char(map->matrix[y][x]))
-					return (-1);
-			}
-			x++;
+			if (map->height > 1 && (map->matrix[1][i] == '0' || is_player_char(map->matrix[1][i])))
+				return (-1);
 		}
-		y++;
+		if (map->matrix[map->height - 1][i] == '0' ||
+			is_player_char(map->matrix[map->height - 1][i]))
+			return (-1);
+		if (map->matrix[map->height - 1][i] == ' ')
+		{
+			if (map->height > 1 && (map->matrix[map->height - 2][i] == '0' || is_player_char(map->matrix[map->height - 2][i])))
+				return (-1);
+		}
+		i++;
+	}
+	i = 0;
+	while (i < map->height)
+	{
+		if (map->matrix[i][0] == '0' || is_player_char(map->matrix[i][0]))
+			return (-1);
+		if (map->matrix[i][0] == ' ')
+		{
+			if (map->width > 1 && (map->matrix[i][1] == '0' || is_player_char(map->matrix[i][1])))
+				return (-1);
+		}
+		if (map->matrix[i][map->width - 1] == '0' ||
+			is_player_char(map->matrix[i][map->width - 1]))
+			return (-1);
+		if (map->matrix[i][map->width - 1] == ' ')
+		{
+			if (map->width > 1 && (map->matrix[i][map->width - 2] == '0' || is_player_char(map->matrix[i][map->width - 2])))
+				return (-1);
+		}
+		i++;
 	}
 	return (0);
+}
+
+static void	flood_fill(t_map map, int y, int x, int *error)
+{
+	if (*error)
+		return ;
+	if (y < 0 || y >= map.height || x < 0 || x >= map.width)
+	{
+		*error = 1;
+		return ;
+	}
+	if (map.cpy_map[y][x] == ' ' || map.cpy_map[y][x] == '\0')
+	{
+		*error = 1;
+		return ;
+	}
+	if (map.cpy_map[y][x] == '1' || map.cpy_map[y][x] == 'F')
+		return ;
+	map.cpy_map[y][x] = 'F';
+	flood_fill(map, y + 1, x, error);
+	flood_fill(map, y - 1, x, error);
+	flood_fill(map, y, x + 1, error);
+	flood_fill(map, y, x - 1, error);
 }
 
 int	map_check(t_cub *cub)
@@ -112,8 +159,6 @@ int	map_check(t_cub *cub)
 	int		pos_y;
 	int		error;
 
-	if (validate_characters(&cub->map) != 1)
-		exit_error("Invalid characters");
 	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");
 	replace_spaces_with_walls(&cub->map);

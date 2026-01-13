@@ -37,33 +37,6 @@ void	padding_rows(t_map *map)
 	}
 }
 
-static char	**dup_map(char **src, int height)
-{
-	char	**copy;
-	int		i;
-
-	copy = malloc(sizeof(char *) * (height + 1));
-	if (!copy)
-		exit_error("Malloc copy map failed");
-	i = 0;
-	while (i < height)
-	{
-		copy[i] = ft_strdup(src[i]);
-		if (!copy)
-			break ;
-		i++;
-	}
-	if (i < height)
-	{
-		while (--i > 0)
-			free(copy[i - 1]);
-		free(copy);
-		return (NULL);
-	}
-	copy[height] = NULL;
-	return (copy);
-}
-
 static int	check_map_borders(t_map *map)
 {
 	int		i;
@@ -140,6 +113,8 @@ int	map_check(t_cub *cub)
 	int		pos_y;
 	int		error;
 
+	if (validate_characters(&cub->map) != 1)
+		exit_error("Invalid characters");
 	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");
 	if (check_map_borders(&cub->map) != 0)

@@ -201,5 +201,7 @@ void	free_map(char **map, int height);
 void	put_pixel(t_cub *cub, int x, int y, int color);
 int		get_texture_pixel(t_img *texture, int x, int y);
 int		is_spacetab(int c);
+char	**dup_map(char **src, int height);
+int		validate_characters(t_map *map);
 
 #endif

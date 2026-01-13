@@ -85,6 +85,7 @@ static char	**dup_map(char **src, int height)
 
 static int	check_map_borders(t_map *map)
 {
+	int	i;
 	int	y;
 	int	x;
 
@@ -161,7 +162,6 @@ int	map_check(t_cub *cub)
 
 	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");
-	replace_spaces_with_walls(&cub->map);
 	if (check_map_borders(&cub->map) != 0)
 		exit_error("Map has open borders");
 	cub->map.cpy_map = dup_map(cub->map.matrix, cub->map.height);

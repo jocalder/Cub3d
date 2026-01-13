@@ -44,15 +44,15 @@ static int	check_side_width(char **map, int i, int side)
 	if (map[0][i] == '0' || is_player_char(map[0][i]))
 		return (-1);
 	if (is_spacetab(map[0][i])
-		&& (side > 1 && map[1][i] == '0'
-		|| is_player_char(map[1][i])))
+		&& (side > 1 && (map[1][i] == '0'
+		|| is_player_char(map[1][i]))))
 		return (-1);
 	if (map[side - 1][i] == '0'
 		|| is_player_char(map[side - 1][i]))
 		return (-1);
 	if (is_spacetab(map[side - 1][i])
-		&& (side > 1 && map[side - 2][i] == '0'
-		|| is_player_char(map[side - 2][i])))
+		&& (side > 1 && (map[side - 2][i] == '0'
+		|| is_player_char(map[side - 2][i]))))
 		return (-1);
 	return (0);
 }
@@ -71,8 +71,8 @@ static int	check_side_height(char **map, int i, int side)
 		|| is_player_char(map[i][side - 1]))
 		return (-1);
 	if (is_spacetab(map[i][side - 1])
-		&& (side > 1 && map[i][side - 2] == '0'
-		|| is_player_char(map[i][side - 2])))
+		&& (side > 1 && (map[i][side - 2] == '0'
+		|| is_player_char(map[i][side - 2]))))
 		return (-1);
 	return (0);
 }

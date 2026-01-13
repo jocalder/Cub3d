@@ -86,17 +86,17 @@ static char	**dup_map(char **src, int height)
 static int	check_map_borders(t_map *map)
 {
 	int	i;
-	int	y;
-	int	x;
+	int	j;
 
-	y = 0;
-	while (y < map->height)
+	i = 0;
+	while (i < map->height)
 	{
-		x = 0;
-		while (x < map->width)
+		j = 0;
+		while (j < map->width)
 		{
 			if (map->height > 1 && (map->matrix[1][i] == '0' || is_player_char(map->matrix[1][i])))
 				return (-1);
+			j++;
 		}
 		if (map->matrix[map->height - 1][i] == '0' ||
 			is_player_char(map->matrix[map->height - 1][i]))

@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:21:53 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2026/01/13 19:35:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2026/01/13 21:34:40 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,14 @@ void	flood_fill(t_map map, int y, int x, int *error)
 	flood_fill(map, y - 1, x, error);
 	flood_fill(map, y, x + 1, error);
 	flood_fill(map, y, x - 1, error);
+}
+
+void	update_ray_tex(t_cub *cub, t_img *tex)
+{
+	if (!cub || !tex)
+		return ;
+	if (cub->ray.tex_y < 0)
+		cub->ray.tex_y = 0;
+	if (cub->ray.tex_y >= tex->height)
+		cub->ray.tex_y = tex->height - 1;
 }

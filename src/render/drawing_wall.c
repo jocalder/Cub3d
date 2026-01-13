@@ -58,7 +58,7 @@ static void	draw_textured_column(t_cub *cub, int x)
 	while (y <= cub->ray.draw_end)
 	{
 		cub->ray.tex_y = (int)cub->ray.tex_pos;
-		update_ray_text(cub, tex);
+		update_ray_tex(cub, tex);
 		// if (cub->ray.tex_y < 0)
 		// 	cub->ray.tex_y = 0;
 		// if (cub->ray.tex_y >= tex->height)

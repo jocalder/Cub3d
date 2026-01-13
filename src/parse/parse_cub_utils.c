@@ -145,7 +145,7 @@ int	map_check(t_cub *cub)
 	int		pos_y;
 	int		error;
 
-	if (valida_characters(&cub->map) != 1)
+	if (validate_characters(&cub->map) != 1)
 		exit_error("Invalid characters");
 	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");

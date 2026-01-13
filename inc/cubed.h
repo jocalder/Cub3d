@@ -165,6 +165,7 @@ int		parse_cub(t_cub *cub, char *path);
 char	**parse_map(char **lines, int start, int *out_height, int *out_width);
 int		map_check(t_cub *cub);
 void	padding_rows(t_map *map);
+void	replace_spaces_with_walls(t_map *map);
 int		parse_texture_north_and_south(t_map *map, char *line);
 int		parse_texture_west_and_east(t_map *map, char *line);
 int		parse_floor_and_ceiling(t_map *map, char *line);

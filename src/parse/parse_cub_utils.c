@@ -37,6 +37,25 @@ void	padding_rows(t_map *map)
 	}
 }
 
+void	replace_spaces_with_walls(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width && map->matrix[y][x])
+		{
+			if (is_spacetab(map->matrix[y][x]))
+				map->matrix[y][x] = '0';
+			x++;
+		}
+		y++;
+	}
+}
+
 static char	**dup_map(char **src, int height)
 {
 	char	**copy;
@@ -66,50 +85,24 @@ static char	**dup_map(char **src, int height)
 
 static int	check_map_borders(t_map *map)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < map->width)
 	{
-		if (map->matrix[0][i] == '0' || is_player_char(map->matrix[0][i]))
+		if (map->matrix[0][i] != '1')
 			return (-1);
-		if (map->matrix[0][i] == ' ')
-		{
-			if (map->height > 1 && (map->matrix[1][i] == '0'
-				|| is_player_char(map->matrix[1][i])))
-				return (-1);
-		}
-		if (map->matrix[map->height - 1][i] == '0' ||
-			is_player_char(map->matrix[map->height - 1][i]))
+		if (map->matrix[map->height - 1][i] != '1')
 			return (-1);
-		if (map->matrix[map->height - 1][i] == ' ')
-		{
-			if (map->height > 1 && (map->matrix[map->height - 2][i] == '0'
-				|| is_player_char(map->matrix[map->height - 2][i])))
-				return (-1);
-		}
 		i++;
 	}
 	i = 0;
 	while (i < map->height)
 	{
-		if (map->matrix[i][0] == '0' || is_player_char(map->matrix[i][0]))
+		if (map->matrix[i][0] != '1')
 			return (-1);
-		if (map->matrix[i][0] == ' ')
-		{
-			if (map->width > 1 && (map->matrix[i][1] == '0'
-				|| is_player_char(map->matrix[i][1])))
-				return (-1);
-		}
-		if (map->matrix[i][map->width - 1] == '0' ||
-			is_player_char(map->matrix[i][map->width - 1]))
+		if (map->matrix[i][map->width - 1] != '1')
 			return (-1);
-		if (map->matrix[i][map->width - 1] == ' ')
-		{
-			if (map->width > 1 && (map->matrix[i][map->width - 2] == '0'
-				|| is_player_char(map->matrix[i][map->width - 2])))
-				return (-1);
-		}
 		i++;
 	}
 	return (0);
@@ -125,6 +118,7 @@ int	map_check(t_cub *cub)
 		exit_error("Invalid characters");
 	if (validate_player(&cub->map, &pos_x, &pos_y) != 1)
 		exit_error("Invalid player");
+	replace_spaces_with_walls(&cub->map);
 	if (check_map_borders(&cub->map) != 0)
 		exit_error("Map has open borders");
 	cub->map.cpy_map = dup_map(cub->map.matrix, cub->map.height);
